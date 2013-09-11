@@ -34,6 +34,8 @@ You do not need to browse for your Aion folder if you extracted it into your Aio
 
 ##Initialization
 
+![Initialization](http://maxxperiod.com/aiongrindmeter/images/init.png)
+
 When you launch Grind Meter, you will be given three input fields that needs to be manually inputted: 
 * Level
 * Current XP
@@ -46,6 +48,7 @@ You can leave any of these fields blank if you do not want to bother with any or
 
 ##XP Mode
 
+![XP Mode](http://maxxperiod.com/aiongrindmeter/images/exp-hr.png)
 
 * XP Gained: Net experience gain of your character for this session.
 
@@ -59,6 +62,8 @@ If you have entered both your starting level and XP during initialization, you c
 
 ###PvE Death
 
+![PvE Death](http://maxxperiod.com/aiongrindmeter/images/death.png)
+
 You lose a small amount of XP whenever you die, but the exact amount of XP lost is not indicated in the chat log. 
 
 Grind Meter's window will be replaced with a prompt that tells you to receive Soul Healing.
@@ -70,6 +75,8 @@ If you had entered your starting level and XP during initialization, you will al
 
 ##AP Mode
 
+
+![AP Mode](http://maxxperiod.com/aiongrindmeter/images/ap-hr.png)
 
 * AP Gained: Your net income of Abyss Points. 
 AP values of Abyss Relics and Blood Marks not included in this total - they are indicated separately in [square brackets] if you have obtained any.
@@ -84,6 +91,8 @@ If you have entered both your starting AP during initialization, you can see you
 
 ###Getting PKed by the opposite faction
 
+![PK](http://maxxperiod.com/aiongrindmeter/images/pk.png)
+
 You lose Abyss Points whenever you get PKed by the opposing faction, but the exact amount of AP lost is not indicated in the chat log. 
 Amount of AP lost is influenced by many factors, and is impossible to calculate without user's manual update.
 
@@ -97,6 +106,8 @@ There is no AP loss in instance server (Dredgion, Crucible arenas, Kamar Battlef
 
 
 ##Kinah / Repose Mode
+
+![Kinah Mode](http://maxxperiod.com/aiongrindmeter/images/kinah.png)
 
 ####Kinah-related fields:
 

@@ -15,6 +15,8 @@ Aion Grind Meter is written in C++ with wxWidgets library powering the Graphical
 
 Aion chat log file (Chat.log) must be enabled and present for Grind Meter to work.
 
+Client must be in English language (Developed and tested on North American servers. Not tested on European service.)
+
 ####Enabling Chat Log
 You can use Aion RainMeter (ARM) to enable chat log. 
 It can be downloaded from http://rainy.ws/

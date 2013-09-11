@@ -5,7 +5,9 @@ Aion Grind Meter - Aion XP/hr + AP/hr meter
 Aion Grind Meter is an XP/hour (Experience gained per hour) and/or AP/hour (Abyss Points gained per hour) meter for Aion.
 It is useful for determining how fast or slow you are leveling up, and/or gaining Abyss Points. 
 
-It uses the chat log file (Chat.log) for data input, and does not modify the Aion client in any way.
+It uses the chat log file (Chat.log) to calculate your XP and AP gains. It does not interact or modify the Aion client in any way.
+
+Aion Grind Meter is written in C++ with wxWidgets library powering the Graphical User Interface (GUI).
 
 
 
@@ -32,8 +34,8 @@ You do not need to browse for your Aion folder if you extracted it into your Aio
 
 <h2>Initialization</h2>
 
-For best results, enter your current character level, experience, and Abyss Points when you launch Grind Meter.
-
+When you launch Grind Meter, you will be given three input fields that needs to be manually inputted: Level, Current XP, and Current AP.
+For best results, fill in these fields correctly.
 You can leave any of these fields blank if you do not want to bother with any or all of them.
 
 
@@ -54,9 +56,10 @@ If you have entered both your starting level and XP during initialization, you c
 <h3>PvE Death</h3>
 
 You lose a small amount of XP whenever you die, but the exact amount of XP lost is not indicated in the chat log. 
-Grind Meter can determine how much XP you lost when you recover XP by Soul Healing, as doing so always recovers 2/3 of your XP lost due to the death.
+When this happens, Grind Meter's window will be replaced with a prompt that tells you to receive Soul Healing.
+If you had entered your starting level and XP during initialization, you will also have the option of manually inputting of your after-death XP manually, useful if a Soul healer is not readily accessible.
 
-If you had entered your starting level and XP during initialization, you can also update your after-death XP manually if a Soul healer is not readily accessible.
+Grind Meter can determine how much XP you lost when you recover XP by Soul Healing, as doing so always recovers 2/3 of your XP lost due to the death.
 
 
 
@@ -79,13 +82,12 @@ If you have entered both your starting AP during initialization, you can see you
 You lose Abyss Points whenever you get PKed by the opposing faction, but the exact amount of AP lost is not indicated in the chat log. 
 Amount of AP lost is influenced by many factors, and is impossible to calculate without user's manual update.
 
-If your character's starting AP value was entered during initialization, you will be asked to manually enter your current AP (after the death).
+If your character's starting AP value was entered during initialization, you will be asked to manually enter your remaining AP after the death.
 Grind Meter will use this information to calculate AP you have lost from this death.
 
 If your initial AP was not entered during initialization, there is no way Grind Meter can determine exactly how many AP you lost whenever you get PKed by the opposing faction.
 
 There is no AP loss in instance server (Dredgion, Crucible arenas, Kamar Battlefields, etc.), and you will not be prompted for manual AP update in these PvP instances.
-
 
 
 

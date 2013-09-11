@@ -41,7 +41,7 @@ MyFrame::MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
 	valuea3 = new wxStaticText(panel, -1, wxT("x,xxx,xxx")); 
 	expSizer->Add(valuea3, wxGBPosition(2, 1), wxGBSpan(1, 2), wxALIGN_RIGHT);
 	gauge = new wxGauge(panel, XP_BAR_ID, 10000, wxDefaultPosition, wxDefaultSize, wxGA_SMOOTH);	
-	//CalcPanel *panel = new CalcPanel(this);
+	
 	expSizer->Add(gauge, wxGBPosition(3, 0), wxGBSpan(1, 2));
 	percent = new wxStaticText(panel, -1, wxT("x.xx%"));
 	expSizer->Add(percent, wxGBPosition(3, 2));
@@ -72,7 +72,7 @@ MyFrame::MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
 	valueb3 = new wxStaticText(apPanel, -1, wxT("x,xxx,xxx")); 
 	apSizer->Add(valueb3, wxGBPosition(2, 1), wxGBSpan(1, 2), wxALIGN_RIGHT);
 	apGauge = new wxGauge(apPanel, XP_BAR_ID, 10000, wxDefaultPosition, wxDefaultSize, wxGA_SMOOTH);	
-	//CalcPanel *panel = new CalcPanel(this);
+	
 	apSizer->Add(apGauge, wxGBPosition(3, 0), wxGBSpan(1, 2));
 	apPercent = new wxStaticText(apPanel, -1, wxT("x.xx%"));
 	apSizer->Add(apPercent, wxGBPosition(3, 2));
@@ -120,8 +120,7 @@ MyFrame::MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
 	cashSizer->Add(valuecb, wxGBPosition(3, 2), wxDefaultSpan, wxALIGN_RIGHT);
 
 	cashSizer->SetDimension(0, 0, FRAME_WIDTH, 130);
-	cashPanel->SetSizer(cashSizer);
-	//navigationPanel->Hide();
+	cashPanel->SetSizer(cashSizer);	
 	
 	// ===========================================================================
 
@@ -145,7 +144,6 @@ MyFrame::MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
 	initSizer->Add(initValue3, wxGBPosition(2, 1));
 	startButton = new wxButton(initPanel, ID_Start, wxT("Start"));
 	initSizer->Add(startButton, wxGBPosition(3, 2));
-	//wxPanel *panel2 = new wxPanel(this, wxID_ANY);
 
 	initSizer->SetDimension(0, 0, FRAME_WIDTH, PANEL_HEIGHT + NAV_HEIGHT);
 	initPanel->SetSizer(initSizer);

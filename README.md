@@ -1,6 +1,6 @@
 Aion Grind Meter - Aion XP/hr + AP/hr meter
 
-<h2>Overview</h2>
+##Overview
 
 Aion Grind Meter is an XP/hour (Experience gained per hour) and/or AP/hour (Abyss Points gained per hour) meter for Aion.
 It is useful for determining how fast or slow you are leveling up, and/or gaining Abyss Points. 
@@ -11,11 +11,11 @@ Aion Grind Meter is written in C++ with wxWidgets library powering the Graphical
 
 
 
-<h2>Prerequisites</h2>
+##Prerequisites
 
 Aion chat log file (Chat.log) must be enabled and present for Grind Meter to work.
 
-<h4>Enabling Chat Log</h4>
+####Enabling Chat Log
 You can use Aion RainMeter (ARM) to enable chat log. 
 It can be downloaded from http://rainy.ws/
 
@@ -23,7 +23,7 @@ Once you have enabled chat log using ARM, log into Aion with any one of your cha
 
 
 
-<h2>Setup</h2>
+##Setup
 
 Extract the executable to anywhere. 
 You will be prompted to browse for your Aion folder when you run it for the first time.
@@ -32,52 +32,57 @@ You do not need to browse for your Aion folder if you extracted it into your Aio
 
 
 
-<h2>Initialization</h2>
+##Initialization
 
-When you launch Grind Meter, you will be given three input fields that needs to be manually inputted: Level, Current XP, and Current AP.
+When you launch Grind Meter, you will be given three input fields that needs to be manually inputted: 
+* Level
+* Current XP
+* Current AP
+
 For best results, fill in these fields correctly.
 You can leave any of these fields blank if you do not want to bother with any or all of them.
 
 
 
-<h2>XP Mode</h2>
+##XP Mode
 
-<ul>
-<li>XP Gained: Net experience gain of your character for this session.</li>
 
-<li>XP / Hour: Your net XP gain divided by number of hours elapsed this session. This value represents how fast you are gaining XP over time.</li>
+* XP Gained: Net experience gain of your character for this session.
 
-<li>Last Change: Amount of XP gained in your last kill or quest reward (if positive), or amount of XP lost from your last death (if negative).</li>
-</ul>
+* XP / Hour: Your net XP gain divided by number of hours elapsed this session. This value represents how fast you are gaining XP over time.
+
+* Last Change: Amount of XP gained in your last kill or quest reward (if positive), or amount of XP lost from your last death (if negative).
+
 
 If you have entered both your starting level and XP during initialization, you can see your XP percentage toward the next level, as well as a compact XP bar.
 
 
-<h3>PvE Death</h3>
+###PvE Death
 
 You lose a small amount of XP whenever you die, but the exact amount of XP lost is not indicated in the chat log. 
-When this happens, Grind Meter's window will be replaced with a prompt that tells you to receive Soul Healing.
+
+Grind Meter's window will be replaced with a prompt that tells you to receive Soul Healing.
+XP you lost on death can be calculated when you recover XP by Soul Healing, as doing so always recovers 2/3 of your XP lost due to the death.
+
 If you had entered your starting level and XP during initialization, you will also have the option of manually inputting of your after-death XP manually, useful if a Soul healer is not readily accessible.
 
-Grind Meter can determine how much XP you lost when you recover XP by Soul Healing, as doing so always recovers 2/3 of your XP lost due to the death.
 
 
+##AP Mode
 
-<h2>AP Mode</h2>
 
-<ul>
-<li>AP Gained: Your net income of Abyss Points. 
-AP values of Abyss Relics and Blood Marks not included in this total - they are indicated separately in [square brackets] if you have obtained any.</li>
+* AP Gained: Your net income of Abyss Points. 
+AP values of Abyss Relics and Blood Marks not included in this total - they are indicated separately in [square brackets] if you have obtained any.
 
-<li>AP / Hour: Your net AP gain divided by number of hours elapsed this session. This value represents how fast you are gaining AP over time. AP/hour from Abyss Relics and Blood Marks values are indicated separately in [square brackets].</li>
+* AP / Hour: Your net AP gain divided by number of hours elapsed this session. This value represents how fast you are gaining AP over time. AP/hour from Abyss Relics and Blood Marks values are indicated separately in [square brackets].
 
-<li>Last Change: Amount of AP gained in your last kill or quest reward (if positive), or amount of AP lost from the lost time you got PKed by an opposing faction player (if negative).</li>
-</ul>
+* Last Change: Amount of AP gained in your last kill or quest reward (if positive), or amount of AP lost from the lost time you got PKed by an opposing faction player (if negative).
+
 
 If you have entered both your starting AP during initialization, you can see your AP percentage toward the next abyss rank (up to 1st kyu), as well as the progress bar toward next rank.
 
 
-<h3>Getting PKed by the opposite faction</h3>
+###Getting PKed by the opposite faction
 
 You lose Abyss Points whenever you get PKed by the opposing faction, but the exact amount of AP lost is not indicated in the chat log. 
 Amount of AP lost is influenced by many factors, and is impossible to calculate without user's manual update.
@@ -91,23 +96,22 @@ There is no AP loss in instance server (Dredgion, Crucible arenas, Kamar Battlef
 
 
 
-<h2>Kinah / Repose Mode</h2>
+##Kinah / Repose Mode
 
-<h4>Kinah-related fields:</h4>
-<ul>
-<li>Cash Flow In: Amount of Kinah you have gained from all sources.</li>
+####Kinah-related fields:
 
-<li>Cash Flow Out: Amount of Kinah you have spent.</li>
+* Cash Flow In: Amount of Kinah you have gained from all sources.
 
-<li>Net Change: The net increase (if positive) or net decrease (if negative) of your kinah.</li>
+* Cash Flow Out: Amount of Kinah you have spent.
 
-<li>Last Transaction: </li>
-</ul>
+* Net Change: The net increase (if positive) or net decrease (if negative) of your kinah.
 
-<h4>Repose/Salvation fields</h4>
+* Last Transaction: The amount of your last Kinah transaction.
 
-<ul>
-<li>Repose Used: Energy of Repose (Rested XP) you have consumed this session.</li>
+####Repose/Salvation fields
 
-<li>Salvtn Used: Energy of Salvation you have consumed this session.</li>
-</ul>
+
+* Repose Used: Energy of Repose (Rested XP) you have consumed this session.
+
+* Salvtn Used: Energy of Salvation you have consumed this session.
+

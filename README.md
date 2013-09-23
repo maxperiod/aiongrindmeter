@@ -128,3 +128,14 @@ There is no AP loss in instance server (Dredgion, Crucible arenas, Kamar Battlef
 
 * Salvtn Used: Energy of Salvation you have consumed this session.
 
+## Known Bugs
+
+* XP Chart for Level 54 and 55 are known to be incorrect so far. 
+
+Many of the entries for the XP Chart were provided by Jambo from NA Aion's official forums, which contained numerous errors. 
+
+During initial development, I corrected numerous errors from Jambo's entries mainly in the lower level range, by manually checking the level up values in-game.
+
+However I did not had any alternate character with levels between 52 and 60 to verify XP requirements for these levels, so any possible errors slipped into 1.0.0 initial release.
+
+I also maintain an online version of ![Aion 4.0 NA XP Chart on Google Spreadsheet](https://docs.google.com/spreadsheet/ccc?key=0AkFTWF6A9JHjdHczaHJaSUQ1OEF6dExJYlFBTHd6REE#gid=0)

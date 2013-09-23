@@ -134,7 +134,7 @@ There is no AP loss in instance server (Dredgion, Crucible arenas, Kamar Battlef
 
 Many of the entries for the XP Chart were provided by Jambo from NA Aion's official forums, which contained numerous errors. 
 
-During initial development, I corrected numerous errors from Jambo's entries mainly in the lower level range, by manually checking the level up values in-game.
+During initial development, I corrected many errors from Jambo's entries, mainly in the lower level range, by manually checking the level up values in-game.
 
 However I did not had any alternate character with levels between 52 and 60 to verify XP requirements for these levels, so any possible errors slipped into 1.0.0 initial release.
 

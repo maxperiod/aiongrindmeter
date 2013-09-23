@@ -58,8 +58,8 @@ ExpHourCalc::ExpHourCalc(){
 	expChart[50] = 69317277;
 	expChart[51] = 75246001;
 	expChart[52] = 80259032;
-	expChart[53] = 84030075;
-	expChart[54] = 96694557;
+	expChart[53] = 90030075;
+	expChart[54] = 104225345;
 	expChart[55] = 111392492;
 	expChart[56] = 127429306;
 	expChart[57] = 144107684;

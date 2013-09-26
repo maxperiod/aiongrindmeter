@@ -77,6 +77,11 @@ void LogFileParser::processLines(){
 				
 			}
 		}
+		else if (expHourCalc->level == 55){
+			if (line.find("You cannot be Level 56 on the ", START_OF_LINE) == START_OF_LINE){
+				expHourCalc->setCannotLevelTo10();
+			}
+		}
 		
 
 		lines.pop();

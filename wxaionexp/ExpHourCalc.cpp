@@ -60,8 +60,8 @@ ExpHourCalc::ExpHourCalc(){
 	expChart[52] = 80259032;
 	expChart[53] = 90030075;
 	expChart[54] = 104225345;
-	expChart[55] = 111392492;
-	expChart[56] = 127429306;
+	expChart[55] = 124225345;
+	expChart[56] = 142978501;
 	expChart[57] = 144107684;
 	expChart[58] = 163937509;
 	expChart[59] = 239209928;
@@ -565,7 +565,7 @@ void ExpHourCalc::calculateDeathPenalty(){
 		tempNumExpPackets ++;
 	}
 	//Soul healed for 1 zeny, and finishing blow was from PvE, ask for AP update
-	else if (lastCashTransaction == -1 && lastDeathIsPk == false){
+	else if (lastCashTransaction == -1 && lastDeathIsPk == false && currentAp != -1){
 		needApUpdate = true;
 	}
 	needExpUpdate = false;

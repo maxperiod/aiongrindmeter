@@ -11,7 +11,7 @@ int main(){
 
 	//================================================================================
 
-	cout << endl << "File Loading" << endl;
+	header("File Loading");
 
 	ExpHourCalc *expHourCalc = new ExpHourCalc();
 	
@@ -34,6 +34,8 @@ int main(){
 	doTest("Level 65 exp", expHourCalc->getExpChartEntry(65), 584561235);
 
 	//================================================================================
+
+	header("XP / AP Gain");
 
 	expHourCalc->start(-1, -1, -1);
 
@@ -93,7 +95,7 @@ int main(){
 
 	//================================================================================
 
-	cout << endl << "Repose + salvation" << endl;
+	header("Repose + salvation");
 
 	expHourCalc->reset();
 
@@ -146,7 +148,7 @@ int main(){
 
 	expHourCalc->reset();
 
-	cout << endl << "With level and starting exp, gathering" << endl;
+	header("With level and starting exp, gathering");
 
 	expHourCalc->level = 20;
 	expHourCalc->currentExp = 12000;
@@ -163,7 +165,7 @@ int main(){
 
 	expHourCalc->reset();
 
-	cout << endl << "Level up exp rollover" << endl;
+	header("Level up exp rollover");
 	
 	expHourCalc->level = 5;
 	expHourCalc->currentExp = 7000;
@@ -178,7 +180,7 @@ int main(){
 
 	//================================================================================
 
-	cout << endl << "Pre ascension exp waste" << endl;
+	header("Pre ascension exp waste");
 
 	expHourCalc->reset();
 
@@ -225,7 +227,31 @@ int main(){
 
 	//================================================================================
 
-	cout << endl << "Level cap exp waste" << endl;
+	header("Fast Track Server level cap exp waste");
+
+	expHourCalc->reset();
+
+	expHourCalc->level = 55;
+	expHourCalc->currentExp = 103225345;
+
+	appendFile("temp.txt", "2013.09.23 22:26:04 : You have used Inggison Illusion Fortress Scroll. ");
+	appendFile("temp.txt", "2013.09.23 22:26:13 : aasfer-IS was affected by its own Aion's Favor I. ");
+	appendFile("temp.txt", "2013.09.23 22:26:15 : Quest updated: [Coin] For the Scholars ");
+	appendFile("temp.txt", "2013.09.23 22:26:20 : You have acquired 5 [item:186000018;ver4;;;;]s and stored them in your special cube. ");
+	appendFile("temp.txt", "2013.09.23 22:26:20 : You have gained 4,186,683 XP from Eduardo. ");
+	appendFile("temp.txt", "2013.09.23 22:26:20 : You cannot be Level 56 on the Fast-Track Server. ");
+	appendFile("temp.txt", "2013.09.23 22:26:20 : Quest complete: [Coin] For the Scholars ");
+
+	parser->processLines();
+	
+	doTest("char exp", expHourCalc->currentExp, 104225345);	
+	doTest("char level", expHourCalc->level, 55);
+	doTest("exp gained", expHourCalc->expGained, 1000000);
+
+
+	//================================================================================
+
+	header("Level cap exp waste");
 
 	expHourCalc->reset();
 	
@@ -260,7 +286,7 @@ int main(){
 
 	//================================================================================
 
-	cout << endl << "Soul Healing / EXP loss on death" << endl;
+	header("Soul Healing / EXP loss on death");
 
 	expHourCalc->reset();
 	
@@ -342,7 +368,9 @@ int main(){
 	doTest("exp gained so far:", expHourCalc->expGained, -244780);
 	doTest("currentExp:", expHourCalc->currentExp, 20893671 - 122390);
 
-	cout << endl << "1 zeny soul healing -> PKed" << endl;
+	//================================================================================
+
+	header("1 zeny soul healing -> PKed");
 
 	expHourCalc->reset();
 
@@ -365,7 +393,7 @@ int main(){
 
 	//================================================================================
 
-	cout << endl << "Manual exp update - pve death" << endl;
+	header("Manual exp update - pve death");
 
 	expHourCalc->reset();
 	expHourCalc->level = 44;
@@ -406,7 +434,7 @@ int main(){
 
 	//================================================================================
 
-	cout << endl << "Abyss Rank" << endl;
+	header("Abyss Rank");
 
 	expHourCalc->currentAp = 1000;
 
@@ -426,7 +454,7 @@ int main(){
 
 	//================================================================================
 
-	cout << endl << "AP Spending" << endl;
+	header("AP Spending");
 
 	expHourCalc->reset();
 	expHourCalc->currentAp = 95000;
@@ -449,7 +477,7 @@ int main(){
 	//================================================================================
 
 
-	cout << endl << "Got PKed, need to ask for manual AP update" << endl;
+	header("Got PKed, need to ask for manual AP update");
 
 	expHourCalc->reset();
 	expHourCalc->currentAp = 100000;
@@ -489,7 +517,7 @@ int main(){
 
 	doTest("Got PKed, didn't update AP, soul healed", expHourCalc->needApUpdate, true);
 
-	cout << endl << "Got killed in structured PvP, no AP loss, don't ask for update" << endl;
+	header("Got killed in structured PvP, no AP loss, don't ask for update");
 
 	expHourCalc->reset();
 	appendFile("temp.txt","2013.06.25 14:44:14 : You have item(s) left to settle at the Broker. ");
@@ -507,7 +535,7 @@ int main(){
 	doTest("I'm on Instance Server", expHourCalc->getCurrentServer(), "Instance");
 	doTest("needApUpdate should be false", expHourCalc->needApUpdate, false);
 
-	cout << endl << "Got killed in by mobster in structured PvP, manual EXP enter, no EXP or AP loss, don't ask for AP update" << endl;
+	header("Got killed in by mobster in structured PvP, manual EXP enter, no EXP or AP loss, don't ask for AP update");
 
 	expHourCalc->reset();
 	expHourCalc->level = 60;
@@ -537,7 +565,8 @@ int main(){
 	
 	parser->processLines();
 
-	doTest("Back to Standard Server, Don't know whether XP was lost or not, needExpUpdate is true", expHourCalc->needExpUpdate, true);
+	header("Back to Standard Server, attacked by enemy faction player, finished blow from monster"); 
+	doTest("Don't know whether XP was lost or not - needExpUpdate is true", expHourCalc->needExpUpdate, true);
 
 	appendFile("temp.txt","2013.06.27 23:03:19 : You do not have much flight time left. Please land on a secure place. ");
 	appendFile("temp.txt","2013.06.27 23:03:19 : Pashid Offense Elite Fighter is in the boost Physical Def,Magical Defense state because Pashid Offense Elite Fighter used Conqueror's Passion. ");
@@ -561,6 +590,8 @@ int main(){
 	expHourCalc->currentExp = 100000;
 	expHourCalc->currentAp = 1000000;
 
+	header("Manual XP update, EXP unchanged (no exp loss) = possible AP loss");
+
 	appendFile("temp.txt","2013.06.27 23:03:19 : You are no longer bleeding. ");
 	appendFile("temp.txt","2013.06.27 23:03:19 : You have died. ");
 
@@ -569,8 +600,8 @@ int main(){
 	expHourCalc->updateExp(100000);
 	parser->processLines();	
 
-	doTest("Manual XP update, no XP loss = possible AP loss", expHourCalc->needApUpdate, true);
-	doTest("EXP no change after manual update, clear needExpUpdate", expHourCalc->needExpUpdate, false);
+	doTest("needApUpdate", expHourCalc->needApUpdate, true);
+	doTest("clear needExpUpdate", expHourCalc->needExpUpdate, false);
 	doTest("lastTickHasChanges is true", expHourCalc->lastTickHasChanges, true);
 	
 	expHourCalc->updateAp(999000);
@@ -594,7 +625,7 @@ int main(){
 
 	//================================================================================
 
-	cout << endl << "Promopt for AP update due to AP loss on death" << endl;
+	header("Promopt for AP update due to AP loss on death");
 
 	expHourCalc->reset();
 	expHourCalc->currentAp = 95000;
@@ -607,7 +638,7 @@ int main(){
 
 	cout << endl << "Invalid update" << endl;
 
-	expHourCalc->updateAp(98000);
+	expHourCalc->updateAp(95001);
 	parser->processLines();	
 	doTest("currentAp after invalid update", expHourCalc->currentAp, 95000);
 	doTest("apGained after invalid update", expHourCalc->apGained, 95000);		
@@ -629,7 +660,7 @@ int main(){
 	doTest("lastTickHasChanges is true", expHourCalc->lastTickHasChanges, true);	
 	doTest("apLostToPk", expHourCalc->apLostToPk, 500);
 
-	cout << endl << "Double deaths" << endl;
+	header("Double deaths");
 
 	appendFile("temp.txt","2013.06.27 17:08:23 : You have gained 3,421,093 XP from Lumiden. ");
 	appendFile("temp.txt","2013.06.27 17:08:23 : You have gained 402 Abyss Points. ");
@@ -648,13 +679,25 @@ int main(){
 	doTest("lastTickHasChanges is true", expHourCalc->lastTickHasChanges, true);	
 
 
-	cout << endl << "Allow manual updates up to currentAP + apLostToPk" << endl;
+	cout << endl << "Reject inputs that exceed currentAP + apLostToPk" << endl;
 
 	appendFile("temp.txt","2013.09.05 20:35:58 : You were killed by Vagina's attack.");
 	parser->processLines();
 
+	expHourCalc->updateAp(95403);
+	parser->processLines();
+
+	doTest("currentAp", expHourCalc->currentAp, 93602);
+	doTest("apGained ", expHourCalc->apGained, 93602);	
+	doTest("lastApPacket", expHourCalc->lastApPacket, -1300);
+	doTest("apLostToPk", expHourCalc->apLostToPk, 1800);
+	doTest("Still need ap update", expHourCalc->needApUpdate, true);
+	doTest("lastTickHasChanges is true", expHourCalc->lastTickHasChanges, false);	
+
 	expHourCalc->updateAp(95402);
 	parser->processLines();
+
+	cout << endl << "Allow manual updates up to currentAP + apLostToPk" << endl;
 
 	doTest("currentAp", expHourCalc->currentAp, 95402);
 	doTest("apGained ", expHourCalc->apGained, 95402);
@@ -666,7 +709,7 @@ int main(){
 
 	//================================================================================
 
-	cout << endl << "Blood Marks and AP Relics" << endl;
+	header("Blood Marks and AP Relics");
 
 	expHourCalc->reset();
 
@@ -694,7 +737,7 @@ int main(){
 
 	//================================================================================
 
-	cout << endl << "Join Channel" << endl;
+	header("Join Channel");
 
 	appendFile("temp.txt","2013.07.24 15:28:52 : You have joined the Poeta region channel. ");
 	appendFile("temp.txt","2013.07.24 15:28:52 : You have joined the Poeta trade channel. ");
@@ -708,7 +751,7 @@ int main(){
 
 	//================================================================================
 
-	cout << endl << "Do not recognize user chat as commands" << endl;
+	header("Do not recognize user chat as commands");
 
 	expHourCalc->reset();
 

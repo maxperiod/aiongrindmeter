@@ -1,3 +1,7 @@
+1.0.2
+* Fixed XP chart for level 57-59
+* If starting AP was not entered during startup, the player will no longer be prompted to manually input AP, during soul healing or manual EXP update, if player had been attacked by another player
+
 1.0.1
 
 * Fixed XP chart for level 54-56

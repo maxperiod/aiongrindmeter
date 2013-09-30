@@ -4,7 +4,8 @@
 #include "stringFunctions.h"
 
 ExpHourCalc::ExpHourCalc(){
-
+	
+	// expChart[x] means exp required to level up from level x+1 to level x+2
 	expChart[ 0] = 400;
 	expChart[ 1] = 1033;
 	expChart[ 2] = 2387;
@@ -62,8 +63,8 @@ ExpHourCalc::ExpHourCalc(){
 	expChart[54] = 104225345;
 	expChart[55] = 124225345;
 	expChart[56] = 142978501;
-	expChart[57] = 144107684;
-	expChart[58] = 163937509;
+	expChart[57] = 165540035;
+	expChart[58] = 189974648;
 	expChart[59] = 239209928;
 	expChart[60] = 248865663;
 	expChart[61] = 257678943;
@@ -528,7 +529,7 @@ bool ExpHourCalc::updateExp(int newValue){
 		expLostToDeaths += expLost;
 		tempNumExpPackets ++;		
 		
-		if (expLost == 0 && currentServer == STANDARD_SERVER){
+		if (expLost == 0 && currentServer == STANDARD_SERVER && currentAp != -1){
 			needApUpdate = true;
 		}
 		needExpUpdate = false;

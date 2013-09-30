@@ -709,6 +709,50 @@ int main(){
 
 	//================================================================================
 
+	header("AP not entered during startup");
+
+	expHourCalc->reset();
+	expHourCalc->level = 60;
+	expHourCalc->currentExp = 50000000;
+	expHourCalc->currentAp = -1;
+	expHourCalc->apGained = 95000;
+	expHourCalc->lastApPacket = 1234;
+
+	appendFile("temp.txt","2013.06.27 19:04:58 : You were killed by Mrplatino's attack.");
+
+	parser->processLines();
+
+	doTest("Still need ap update", expHourCalc->needApUpdate, false);
+	doTest("lastTickHasChanges is false", expHourCalc->lastTickHasChanges, false);
+	
+
+	cout << endl << "Attacked by player, finishing blow by monster, soul healing" << endl;
+
+	appendFile("temp.txt","2013.06.27 23:03:19 : You have died. ");
+
+	appendFile("temp.txt","2013.06.27 23:03:52 : You spent 1 Kinah. ");
+	appendFile("temp.txt","2013.06.27 23:03:52 : You received Soul Healing. ");
+
+	parser->processLines();
+
+	doTest("Still need ap update", expHourCalc->needApUpdate, false);
+	doTest("lastTickHasChanges is false", expHourCalc->lastTickHasChanges, false);
+
+	cout << endl << "Attacked by player, finishing blow by monster, manual exp update" << endl;
+
+	appendFile("temp.txt","2013.06.27 23:03:19 : You have died. ");
+	parser->processLines();
+
+	expHourCalc->updateExp(50000000);
+	parser->processLines();
+
+	doTest("don't need exp update", expHourCalc->needExpUpdate, false);
+	doTest("Still need ap update", expHourCalc->needApUpdate, false);
+	doTest("lastTickHasChanges is false", expHourCalc->lastTickHasChanges, true);
+
+
+	//================================================================================
+
 	header("Blood Marks and AP Relics");
 
 	expHourCalc->reset();

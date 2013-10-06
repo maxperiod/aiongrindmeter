@@ -1,11 +1,17 @@
 #include "LogFileParser.h"
 
+/*********************************************************************************************
+Attach logfile class to this class
+*********************************************************************************************/
 LogFileParser::LogFileParser(string filename){
 	logFile = new LogFile(filename);
 	if (logFile->isOK) isOK = true;
 	else isOK = false;
 }
 
+/*********************************************************************************************
+Attach exp/hour class to this class
+*********************************************************************************************/
 bool LogFileParser::setExpHourCalc(ExpHourCalc *calc){
 	
 	expHourCalc = calc;
@@ -13,6 +19,9 @@ bool LogFileParser::setExpHourCalc(ExpHourCalc *calc){
 	return false;
 }
 
+/*********************************************************************************************
+Read and parse new lines added to the Aion log file
+*********************************************************************************************/
 void LogFileParser::processLines(){
 	queue<string> lines = logFile->readLines();
 
@@ -53,6 +62,10 @@ void LogFileParser::processLines(){
 		}
 		else if (line.find("You received Soul Healing.", START_OF_LINE) == START_OF_LINE){									
 			expHourCalc->calculateDeathPenalty();			
+			
+		}
+		else if (line.find("You do not have any XP to recover.", START_OF_LINE) == START_OF_LINE){									
+			expHourCalc->needExpUpdate = false;			
 			
 		}
 		else if (line.find("You used ", START_OF_LINE) == START_OF_LINE){						

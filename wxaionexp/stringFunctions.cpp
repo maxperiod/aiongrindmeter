@@ -15,6 +15,9 @@ string formatKiloMega(float number){
 	return oss.str();
 }
 
+/*********************************************************************************************
+Remove non-numeric characters from the string, intended for strip commas from a number
+*********************************************************************************************/
 string stripCommas(string line){
 	
 	string newString;
@@ -27,6 +30,9 @@ string stripCommas(string line){
 	return newString;
 }
 
+/*********************************************************************************************
+Format a integer with comma separators. Optionally add plus sign on non-negative numbers
+*********************************************************************************************/
 string formatNumber(int number, bool addPlusSign){
 	ostringstream oss;
 	oss.imbue(locale(""));
@@ -36,7 +42,9 @@ string formatNumber(int number, bool addPlusSign){
 	
 }
 
-
+/*********************************************************************************************
+Format percentages with 2 decimal spaces
+*********************************************************************************************/
 string formatPercent(float percentage){
 	ostringstream oss;
 	oss.imbue(locale(""));
@@ -44,6 +52,9 @@ string formatPercent(float percentage){
 	return oss.str();
 }
 
+/*********************************************************************************************
+Format percentage changes. 2 decimal spaces, 3 if below 0.1% Add plus sign if not negative
+*********************************************************************************************/
 string formatPercentChange(float value){
 	ostringstream oss;
 	oss.imbue(locale(""));
@@ -58,6 +69,9 @@ string formatPercentChange(float value){
 	return oss.str();
 }
 
+/*********************************************************************************************
+Format two values into (XXX,XXX,XXX / YYY,YYY,YYY)
+*********************************************************************************************/
 string formatCurrentAndNextValues(int current, int next){
 	ostringstream oss;
 	oss.imbue(locale(""));
@@ -70,6 +84,7 @@ string formatCurrentAndNextValues(int current, int next){
 	return oss.str();
 }
 
+
 double calculateExpPercent(int currentExp, int nextLevel){
 	
 	return floor((double)currentExp / nextLevel * 10000) / 100;
@@ -77,6 +92,9 @@ double calculateExpPercent(int currentExp, int nextLevel){
 	
 }
 
+/*********************************************************************************************
+Get of Abyss Rank
+*********************************************************************************************/
 string formatAbyssRankName(int abyssRank){
 	ostringstream oss;
 	if (abyssRank > 1) oss << abyssRank << " kyu";
@@ -84,6 +102,9 @@ string formatAbyssRankName(int abyssRank){
 	return oss.str();
 }
 
+/*********************************************************************************************
+Format elasped time into HH : MM : SS format
+*********************************************************************************************/
 string formatElapsedTime(int elapsedTime){
 	ostringstream oss;
 	int hours = elapsedTime / 3600;
@@ -101,6 +122,9 @@ string formatElapsedTime(int elapsedTime){
 
 }
 
+/*********************************************************************************************
+Verify a string to see whether it's a valid integer or not. Invalid inputs return -1
+*********************************************************************************************/
 int verifyNumericInput(string input){
 	bool hasComma = false;
 	bool hasPeriod = false;

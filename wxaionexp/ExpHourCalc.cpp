@@ -3,6 +3,9 @@
 #include "ExpHourCalc.h"
 #include "stringFunctions.h"
 
+/*********************************************************************************************
+Constructor: Initialize the exp chart and blood mark AP value chart with hardcoded values
+*********************************************************************************************/
 ExpHourCalc::ExpHourCalc(){
 	
 	// expChart[x] means exp required to level up from level x+1 to level x+2
@@ -224,7 +227,6 @@ ExpHourCalc::ExpHourCalc(){
 	
 }
 
-
 void ExpHourCalc::start(int startLevel, int startExp, int startAp){
 	reset();
 	startTime = clock();
@@ -236,6 +238,9 @@ void ExpHourCalc::stop(){
 	stopTime = clock();
 }
 
+/*********************************************************************************************
+Resets the exp/hour and ap/hour calculator.
+*********************************************************************************************/
 void ExpHourCalc::reset(){
 	// Don't reset the level, currentExp, and currentAp fields or the manual initial inputs will be gone
 
@@ -285,24 +290,36 @@ void ExpHourCalc::reset(){
 
 }
 
+/*********************************************************************************************
+Calculates the user's EXP per hour rate.
+*********************************************************************************************/
 float ExpHourCalc::getExpPerHour(){
 	float hours = (clock() - startTime) / (CLOCKS_PER_SEC * 3600);
 
 	return expGained / hours;
 }
 
+/*********************************************************************************************
+Calculates the user's AP per hour rate.
+*********************************************************************************************/
 float ExpHourCalc::getApPerHour(){
 	float hours = (clock() - startTime) / (CLOCKS_PER_SEC * 3600);
 
 	return apGained / hours;
 }
 
+/*********************************************************************************************
+Calculates the user's AP-equivalent per hour from the Abyss relics and Blood Marks.
+*********************************************************************************************/
 float ExpHourCalc::getRelicApPerHour(){
 	float hours = (clock() - startTime) / (CLOCKS_PER_SEC * 3600);
 
 	return relicAp / hours;
 }
 
+/*********************************************************************************************
+Calculates the player's current EXP percentage.
+*********************************************************************************************/
 float ExpHourCalc::getExpPercent(){
 	if (level > 0 && level <= LEVEL_CAP){
 		return floor((float)currentExp / getExpChartEntry(level) * 10000) / 100;
@@ -310,11 +327,18 @@ float ExpHourCalc::getExpPercent(){
 	else return 0;
 }
 
+/*********************************************************************************************
+Calculates the percentage of a level up gained from the last EXP packet
+*********************************************************************************************/
 float ExpHourCalc::getLastExpPacketPercent(){
-	if (level > 0 && level <= LEVEL_CAP) return (float)lastExpPacket / getExpChartEntry(level) * 100;
+	if (level > 0 && level <= LEVEL_CAP) 
+		return (float)lastExpPacket / getExpChartEntry(level) * 100;
 	else return 0;
 }
 
+/*********************************************************************************************
+Calculates the percentage of a level up gained from the last AP packet
+*********************************************************************************************/
 float ExpHourCalc::getLastApPacketPercent(){
 	int ApRank = getAbyssRank();	
 	if (getNextRankAp() > 0)
@@ -322,6 +346,9 @@ float ExpHourCalc::getLastApPacketPercent(){
 	else return 0;
 }
 
+/*********************************************************************************************
+Calculates the AP progress toward the next Abyss Rank as a percentage 
+*********************************************************************************************/
 float ExpHourCalc::getApPercent(){
 	int ApRank = getAbyssRank();
 	if (ApRank > 9) return 0;
@@ -330,12 +357,17 @@ float ExpHourCalc::getApPercent(){
 	return 100;
 }
 
-
+/*********************************************************************************************
+Given the input character level, retrieve the amount of EXP required to level up to next level
+*********************************************************************************************/
 int ExpHourCalc::getExpChartEntry(int level){		
 	if (level <= LEVEL_CAP && level > 0) return expChart[level - 1];	
 	return -1;
 }
 
+/*********************************************************************************************
+Retrieve the amount of AP required to next Abyss rank
+*********************************************************************************************/
 float ExpHourCalc::getNextRankAp(){
 	int ApRank = getAbyssRank();
 	if (ApRank <= 1) return 0;
@@ -344,6 +376,9 @@ float ExpHourCalc::getNextRankAp(){
 	else return -1;
 }
 
+/*********************************************************************************************
+Get current Abyss Rank (Soldier, Rank i)
+*********************************************************************************************/
 int ExpHourCalc::getAbyssRank(){
 
 	int i;
@@ -354,10 +389,16 @@ int ExpHourCalc::getAbyssRank(){
 	return i;
 }
 
+/*********************************************************************************************
+Get name of current Abyss Rank
+*********************************************************************************************/
 string ExpHourCalc::getAbyssRankName(){
 	return formatAbyssRankName(getAbyssRank());
 }
 
+/*********************************************************************************************
+Calculate elapsed time in seconds, since timer start
+*********************************************************************************************/
 string ExpHourCalc::getElapsedTime(){
 	return formatElapsedTime((clock() - startTime) / CLOCKS_PER_SEC);
 }
@@ -368,7 +409,9 @@ int ExpHourCalc::getNetCashFlow(){
 	return cashGained - cashSpent;
 }
 
-
+/*********************************************************************************************
+Check current EXP for overflow and adjust character level accordingly
+*********************************************************************************************/
 void ExpHourCalc::checkLevelUp(){
 	if (level >= 1){	
 		//Ascension quest reward already accepted, character is not at level cap
@@ -389,6 +432,9 @@ void ExpHourCalc::checkLevelUp(){
 	
 }
 
+/*********************************************************************************************
+Player's character gains EXP
+*********************************************************************************************/
 void ExpHourCalc::gainExp(string line){
 	stringstream ss(line);
 
@@ -444,6 +490,9 @@ void ExpHourCalc::gainExp(string line){
 
 }
 
+/*********************************************************************************************
+Player's character gains AP
+*********************************************************************************************/
 void ExpHourCalc::gainAP(string line){
 	stringstream ss(line);
 
@@ -464,6 +513,9 @@ void ExpHourCalc::gainAP(string line){
 	tempNumApPackets ++;
 }
 
+/*********************************************************************************************
+Player's character gains Kinah
+*********************************************************************************************/
 void ExpHourCalc::gainCash(string line){
 	stringstream ss(line);
 
@@ -483,6 +535,9 @@ void ExpHourCalc::gainCash(string line){
 	
 }
 
+/*********************************************************************************************
+Player's character spends Kinah
+*********************************************************************************************/
 void ExpHourCalc::spendCash(string line){
 	stringstream ss(line);
 	
@@ -500,6 +555,9 @@ void ExpHourCalc::spendCash(string line){
 	lastCashTransaction = -cashSpend;
 }
 
+/*********************************************************************************************
+User spends AP to purchase Abyss items.
+*********************************************************************************************/
 void ExpHourCalc::spendAP(string line){
 	stringstream ss(line);
 	
@@ -520,6 +578,9 @@ void ExpHourCalc::spendAP(string line){
 
 }
 
+/*********************************************************************************************
+Calculates amount XP loss via user's manual input, after character was killed in PvE.
+*********************************************************************************************/
 bool ExpHourCalc::updateExp(int newValue){
 	if (newValue < 0) return false;
 	int expLost = currentExp - newValue;	
@@ -538,6 +599,9 @@ bool ExpHourCalc::updateExp(int newValue){
 	return false;
 }
 
+/*********************************************************************************************
+Calculates amount AP loss due to the player was killed by an opposite faction player.
+*********************************************************************************************/
 bool ExpHourCalc::updateAp(int newValue){
 	if (newValue < 0) return false;
 	int apLost = currentAp - newValue;
@@ -554,9 +618,12 @@ bool ExpHourCalc::updateAp(int newValue){
 	return false;
 }
 
+/*********************************************************************************************
+Calculates amount XP loss from last death as the player visits a Soul Healer.
+*********************************************************************************************/
 void ExpHourCalc::calculateDeathPenalty(){
 	
-	//If Soul healing amount is not 1 zeny AND flagged PvE with "You have died.",
+	//If Soul healing amount is not 1 kinah AND flagged PvE with "You have died.",
 	//EXP has been lost
 	if (lastCashTransaction != -1 && needExpUpdate == true){		
 		int expLost = floor((float)tempExpGained * 1.5); 
@@ -572,11 +639,17 @@ void ExpHourCalc::calculateDeathPenalty(){
 	needExpUpdate = false;
 }
 
+/*********************************************************************************************
+Player dies in PvE.
+*********************************************************************************************/
 void ExpHourCalc::PvEDeath(){
 	needExpUpdate = true;
 	lastDeathIsPk = false;
 }
 
+/*********************************************************************************************
+Player was killed by an opposite faction's player.
+*********************************************************************************************/
 void ExpHourCalc::PvPDeath(){
 	if (currentServer == STANDARD_SERVER && currentAp != -1){							
 		needApUpdate = true;
@@ -584,6 +657,9 @@ void ExpHourCalc::PvPDeath(){
 	}
 }
 
+/*********************************************************************************************
+Player acquires an item. Currently only used for calculating AP value of relics gained
+*********************************************************************************************/
 void ExpHourCalc::acquireItem(string line){
 	stringstream ss(line);
 	
@@ -615,6 +691,9 @@ void ExpHourCalc::acquireItem(string line){
 	
 }
 
+/*********************************************************************************************
+Apply all calculated changes
+*********************************************************************************************/
 void ExpHourCalc::tallyExpPackets(){
 	
 	if (tempNumExpPackets > 0 || tempNumApPackets > 0){
@@ -646,10 +725,16 @@ void ExpHourCalc::tallyExpPackets(){
 
 }
 
+/*********************************************************************************************
+Unused function
+*********************************************************************************************/
 void ExpHourCalc::joinChannel(string line, int channelWordPos){
 	string channel = line.substr(START_OF_LINE + 20, channelWordPos - START_OF_LINE - 20);
 }
 
+/*********************************************************************************************
+Player switches game server (Standard, Fast Track, Instance servers)
+*********************************************************************************************/
 void ExpHourCalc::joinServer(string line, int serverWordPos){
 	string server = line.substr(START_OF_LINE + 16, serverWordPos - START_OF_LINE - 16);
 	
@@ -662,6 +747,9 @@ void ExpHourCalc::joinServer(string line, int serverWordPos){
 	
 }
 
+/*********************************************************************************************
+What server is the player currently in?
+*********************************************************************************************/
 string ExpHourCalc::getCurrentServer(){
 	switch(currentServer){
 	case STANDARD_SERVER:
@@ -678,6 +766,9 @@ string ExpHourCalc::getCurrentServer(){
 	}
 }
 
+/*********************************************************************************************
+Set flag when the player is prevented from leveling up due to non-Ascension at level 9
+*********************************************************************************************/
 void ExpHourCalc::setCannotLevelTo10(){
 	cannotLevelTo10 = true;
 }

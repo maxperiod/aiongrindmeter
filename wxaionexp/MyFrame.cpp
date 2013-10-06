@@ -15,6 +15,9 @@ EVT_TIMER(TIMER_ID, MyFrame::OnTimer)
 
 wxEND_EVENT_TABLE()
 
+/*********************************************************************************************
+Constructor: Create all panels for the application
+*********************************************************************************************/
 MyFrame::MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
 : wxFrame(NULL, wxID_ANY, title, pos, size, (wxDEFAULT_FRAME_STYLE | wxSTAY_ON_TOP) & ~(wxRESIZE_BORDER | wxMAXIMIZE_BOX))
 {
@@ -294,12 +297,17 @@ MyFrame::MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
 }
 
 
-
+/*********************************************************************************************
+Timer function involved every second - read and parse new lines from Aion chat log
+*********************************************************************************************/
 void MyFrame::OnTimer(wxTimerEvent& event){
 	
 	parser->processLines();
 
-	this->SetTitle(expHourCalc->getElapsedTime());
+	if (expHourCalc->level != -1)
+		this->SetTitle("L" + formatNumber(expHourCalc->level) + " | " + expHourCalc->getElapsedTime());
+	else 
+		this->SetTitle(expHourCalc->getElapsedTime());
 
 	//Whenever player gains XP, clear the manual XP update field
 	//Whenever player gains AP, clear the manual AP update field
@@ -353,6 +361,9 @@ void MyFrame::OnTimer(wxTimerEvent& event){
 
 }
 
+/*********************************************************************************************
+Refresh EXP gains panel
+*********************************************************************************************/
 void MyFrame::refreshExpPanel(){
 	
 	valuea1->SetLabelText(formatNumber(expHourCalc->expGained));
@@ -377,6 +388,9 @@ void MyFrame::refreshExpPanel(){
 	panel->Layout();
 }
 
+/*********************************************************************************************
+Refresh Abyss Points gains panel
+*********************************************************************************************/
 void MyFrame::refreshApPanel(){
 	if (expHourCalc->relicAp > 0){
 		valueb1->SetLabelText(formatNumber(expHourCalc->apGained) + " [" + formatNumber(expHourCalc->relicAp) + "]");	
@@ -405,6 +419,9 @@ void MyFrame::refreshApPanel(){
 	apPanel->Layout();
 }
 
+/*********************************************************************************************
+Refresh kinal panel
+*********************************************************************************************/
 void MyFrame::refreshCashPanel(){
 	valuec1->SetLabelText(formatNumber(expHourCalc->cashGained));
 	valuec2->SetLabelText(formatNumber(expHourCalc->cashSpent));
@@ -417,7 +434,9 @@ void MyFrame::refreshCashPanel(){
 	cashPanel->Layout();
 }
 
-
+/*********************************************************************************************
+Start button handler - starts the exp/hour calculator
+*********************************************************************************************/
 void MyFrame::OnStart(wxCommandEvent& event){
 	// For verifyNumericInput function, -2 is blank input, -1 is invalid input
 	int level = verifyNumericInput(initValue1->GetValue().ToStdString());
@@ -474,6 +493,9 @@ void MyFrame::OnStart(wxCommandEvent& event){
 	
 }
 
+/*********************************************************************************************
+User manual XP update handler
+*********************************************************************************************/
 void MyFrame::OnExpUpdate(wxCommandEvent& event){
 	bool success = expHourCalc->updateExp(verifyNumericInput(expInputValue->GetValue().ToStdString()));
 	if (success){
@@ -489,6 +511,9 @@ void MyFrame::OnExpUpdate(wxCommandEvent& event){
 	}
 }
 
+/*********************************************************************************************
+User manual AP update handler
+*********************************************************************************************/
 void MyFrame::OnApUpdate(wxCommandEvent& event){
 	bool success = expHourCalc->updateAp(verifyNumericInput(apInputValue->GetValue().ToStdString()));
 	if (success){
@@ -507,6 +532,9 @@ void MyFrame::OnApUpdate(wxCommandEvent& event){
 void MyFrame::OnPrevious(wxCommandEvent& event){
 }
 
+/*********************************************************************************************
+"Mode" button handler
+*********************************************************************************************/
 void MyFrame::OnNext(wxCommandEvent& event){
 	switch(currentMode){
 	case XP_MODE:
@@ -548,6 +576,9 @@ void MyFrame::OnHello(wxCommandEvent& event)
 	wxLogMessage("Hello world from wxWidgets!");
 }
 
+/*********************************************************************************************
+Check if file exists or not
+*********************************************************************************************/
 bool MyFrame::FileExists(string filename){
 	bool fileExists;
 	ifstream file;

@@ -10,7 +10,7 @@
 #include "stringFunctions.h"
 
 #define APP_TITLE "Aion Grind Meter"
-#define APP_VERSION "1.0.2"
+#define APP_VERSION "1.0.3"
 
 #define FRAME_WIDTH 230
 #define FRAME_HEIGHT 140

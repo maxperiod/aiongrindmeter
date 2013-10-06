@@ -393,6 +393,23 @@ int main(){
 
 	//================================================================================
 
+	header("Clear needExpUpdate if no XP to recover");
+
+	expHourCalc->reset();
+	expHourCalc->level = 44;
+	expHourCalc->currentExp = 10000000;
+	expHourCalc->expGained = 480752;
+
+	appendFile("temp.txt","2013.07.15 18:24:31 : You can see again ");
+	appendFile("temp.txt","2013.07.15 18:24:31 : You have died. ");
+	appendFile("temp.txt","2013.07.15 16:42:31 : You have resurrected. ");
+	appendFile("temp.txt","2013.07.13 17:11:07 : You do not have any XP to recover. ");
+
+	doTest("needExpUpdate", expHourCalc->needExpUpdate, false);
+	doTest("needApUpdate", expHourCalc->needApUpdate, false);
+
+	//================================================================================
+
 	header("Manual exp update - pve death");
 
 	expHourCalc->reset();

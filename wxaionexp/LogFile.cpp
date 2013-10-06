@@ -3,6 +3,9 @@
 
 using namespace std;
 
+/*********************************************************************************************
+Constructor: Open Aion log file from filename, move file pointer to end of file
+*********************************************************************************************/
 LogFile::LogFile(string filename){
 	file.open(filename);
 	file.seekg(0, ios::end);
@@ -11,10 +14,16 @@ LogFile::LogFile(string filename){
 	else isOK = true;
 }
 
+/*********************************************************************************************
+Destructor: Close file
+*********************************************************************************************/
 LogFile::~LogFile(){
 	file.close();	
 }
 
+/*********************************************************************************************
+Read new lines that have been appended to the log file by the game Client, put them into a queue
+*********************************************************************************************/
 queue<string> LogFile::readLines(){
 	
 

@@ -1,5 +1,6 @@
 1.0.3
-* If you visit a Soul Healer and you have no Soul Sickness and no XP to recover, the PvE death prompt (which tells you to visit Soul Healer) will now disappear, and this app will continue to function.
+
+* If you get killed by a monster in PvP arenas (no XP loss, no Soul Sickness), you can now visit a Soul Healer and ask for Soul Healing. It will now unconditionally clear your "You must visit a Soul Healer" state and allow the app to continue to function without restarting.
 * Added display of player's character level (if entered)
 
 1.0.2

@@ -84,19 +84,25 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ExpHourCalc.cpp" />
+    <ClCompile Include="GatheringLog.cpp" />
+    <ClCompile Include="Location.cpp" />
     <ClCompile Include="LogFile.cpp" />
     <ClCompile Include="LogFileParser.cpp" />
     <ClCompile Include="MyApp.cpp" />
     <ClCompile Include="MyFrame.cpp" />
     <ClCompile Include="stringFunctions.cpp" />
+    <ClCompile Include="SummaryFrame.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ExpHourCalc.h" />
+    <ClInclude Include="GatheringLog.h" />
+    <ClInclude Include="Location.h" />
     <ClInclude Include="LogFile.h" />
     <ClInclude Include="LogFileParser.h" />
     <ClInclude Include="MyApp.h" />
     <ClInclude Include="MyFrame.h" />
     <ClInclude Include="stringFunctions.h" />
+    <ClInclude Include="SummaryFrame.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

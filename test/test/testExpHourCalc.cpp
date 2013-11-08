@@ -14,12 +14,14 @@ int main(){
 	header("File Loading");
 
 	ExpHourCalc *expHourCalc = new ExpHourCalc();
+	GatheringLog *gatheringLog = new GatheringLog();
 	
 	LogFileParser *fileNotExist = new LogFileParser("sdlfkjskldfj");
 	doTest("LogFileParser with invalid logfile input", fileNotExist->isOK, false);
 
 	LogFileParser *parser = new LogFileParser("temp.txt");
 	parser->setExpHourCalc(expHourCalc);
+	parser->setGatheringLog(gatheringLog);
 	
 	doTest("LogFileParser with valid logfile", parser->isOK, true);
 
@@ -153,6 +155,7 @@ int main(){
 	expHourCalc->level = 20;
 	expHourCalc->currentExp = 12000;
 
+	appendFile("temp.txt", "2013.07.29 23:55:28 : You have started gathering Ancient Aether.");
 	appendFile("temp.txt", "2013.07.02 01:25:12 : You have acquired [item:152000916;ver4;;;;]. ");
 	appendFile("temp.txt", "2013.07.02 01:25:12 : You have gained 7,580 XP. ");
 	appendFile("temp.txt", "2013.07.02 01:25:12 : You have gained experience from gathering. ");
@@ -831,7 +834,9 @@ int main(){
 
 	//================================================================================
 	printSummary();
-	
+	delete(parser);
+	remove("temp.txt");
+
 	getchar();
 	return 0;
 }

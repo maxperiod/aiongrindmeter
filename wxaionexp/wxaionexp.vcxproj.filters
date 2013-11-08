@@ -33,6 +33,15 @@
     <ClCompile Include="LogFileParser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="GatheringLog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Location.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SummaryFrame.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ExpHourCalc.h">
@@ -51,6 +60,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="LogFileParser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Location.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GatheringLog.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SummaryFrame.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

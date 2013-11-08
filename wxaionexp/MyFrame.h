@@ -6,11 +6,14 @@
 #include <wx/fileconf.h>
 #include <wx/gbsizer.h>
 
+#include "SummaryFrame.h"
+
 #include "LogFileParser.h"
+
 #include "stringFunctions.h"
 
 #define APP_TITLE "Aion Grind Meter"
-#define APP_VERSION "1.0.3"
+#define APP_VERSION "1.1.0"
 
 #define FRAME_WIDTH 230
 #define FRAME_HEIGHT 140
@@ -32,11 +35,15 @@ class MyFrame: public wxFrame
 	public:
 	MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size);
 
+	SummaryFrame *summaryFrame;
+
 	wxBoxSizer *parentSizer;
 
 	wxGridBagSizer* expSizer;
 	wxGridBagSizer* apSizer;
 	wxGridBagSizer* cashSizer;
+	wxGridBagSizer* gatherSizer;
+	wxGridBagSizer* gatherLevelSizer;
 	wxGridBagSizer* initSizer;
 	wxGridBagSizer* expUpdateSizer;
 	wxGridBagSizer* apUpdateSizer;
@@ -46,6 +53,8 @@ class MyFrame: public wxFrame
 	wxPanel *panel;
 	wxPanel *apPanel;
 	wxPanel *cashPanel;
+	wxPanel *gatherPanel;
+	wxPanel *gatherLevelPanel;
 	wxPanel *initPanel;
 	wxPanel *navigationPanel;
 	wxPanel *manualExpUpdatePanel;
@@ -93,6 +102,58 @@ class MyFrame: public wxFrame
 	wxStaticText *valueca;
 	wxStaticText *valuecb;
 
+	// Gathering panel
+	wxStaticText *headerd1;
+	wxStaticText *headerd2;
+	wxStaticText *headerd3;
+	wxStaticText *headerd4;
+
+	wxStaticText *labeld1;
+	wxStaticText *labeld2;
+	wxStaticText *rated1;
+	wxStaticText *rated2;
+
+	wxStaticText *valued11;
+	wxStaticText *valued12;
+	wxStaticText *valued13;
+	wxStaticText *valued14;
+	wxStaticText *percentd11;
+	wxStaticText *percentd12;
+	wxStaticText *percentd13;
+
+	wxStaticText *valued21;
+	wxStaticText *valued22;
+	wxStaticText *valued23;
+	wxStaticText *valued24;
+	wxStaticText *percentd21;
+	wxStaticText *percentd22;
+	wxStaticText *percentd23;
+	wxStaticText *percentd24;
+
+	// Gather leveling panel
+	wxStaticText *labele11;
+	wxStaticText *labele12;
+	wxStaticText *labele13;
+	wxStaticText *labele14;
+	wxStaticText *labele21;
+	wxStaticText *labele22;
+	wxStaticText *labele23;
+	wxStaticText *labele24;
+	wxStaticText *labele31;
+	wxStaticText *labele32;
+
+	wxStaticText *valuee11;
+	wxStaticText *valuee12;
+	wxStaticText *valuee13;
+	wxStaticText *valuee14;
+	wxStaticText *valuee21;
+	wxStaticText *valuee22;
+	wxStaticText *valuee23;
+	wxStaticText *valuee24;
+
+	wxGauge *gatherGauge;
+	wxGauge *craftGauge;
+
 	// Manual XP Update Panel
 	wxStaticText *expInputMessage1;
 	wxStaticText *expInputMessage2;
@@ -132,6 +193,8 @@ class MyFrame: public wxFrame
 	string aionPath;
 	
 	ExpHourCalc *expHourCalc;
+	GatheringLog *gatheringLog;
+	LocationPinger *locationPinger;
 	LogFileParser *parser;
 
 	int currentMode;
@@ -159,6 +222,8 @@ class MyFrame: public wxFrame
 	void refreshExpPanel();
 	void refreshApPanel();
 	void refreshCashPanel();
+	void refreshGatherPanel();
+	void refreshGatherLevelPanel();
 	
 	wxDECLARE_EVENT_TABLE();
 
@@ -176,6 +241,8 @@ enum {
 	XP_MODE,
 	AP_MODE,
 	CASH_MODE,
+	GATHER_MODE,
+	GATHER_LEVEL_MODE,
 	UPDATE_XP_MODE,
 	UPDATE_AP_MODE,
 	XP_BAR_ID,

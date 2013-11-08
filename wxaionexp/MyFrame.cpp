@@ -127,6 +127,123 @@ MyFrame::MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
 	
 	// ===========================================================================
 
+	gatherSizer = new wxGridBagSizer(4, 4);
+
+	gatherPanel = new wxPanel(this, wxID_ANY, wxDefaultPosition, wxSize(FRAME_WIDTH, PANEL_HEIGHT));
+	parentSizer->Add(gatherPanel, wxGROW);
+	
+	headerd1 = new wxStaticText(gatherPanel, -1, wxT("Success")); 
+	gatherSizer->Add(headerd1, wxGBPosition(0, 1));
+	headerd2 = new wxStaticText(gatherPanel, -1, wxT("Failure")); 
+	gatherSizer->Add(headerd2, wxGBPosition(0, 2));
+	headerd3 = new wxStaticText(gatherPanel, -1, wxT("Cancel")); 
+	gatherSizer->Add(headerd3, wxGBPosition(0, 3));
+	headerd4 = new wxStaticText(gatherPanel, -1, wxT("Procs")); 
+	gatherSizer->Add(headerd4, wxGBPosition(0, 4));
+
+	labeld1 = new wxStaticText(gatherPanel, -1, wxT("Gathering")); 
+	gatherSizer->Add(labeld1, wxGBPosition(1, 0));
+	valued11 = new wxStaticText(gatherPanel, -1, wxT("xxx")); 
+	gatherSizer->Add(valued11, wxGBPosition(1, 1), wxDefaultSpan, wxALIGN_RIGHT);
+	valued12 = new wxStaticText(gatherPanel, -1, wxT("xxx")); 
+	gatherSizer->Add(valued12, wxGBPosition(1, 2), wxDefaultSpan, wxALIGN_RIGHT);
+	valued13 = new wxStaticText(gatherPanel, -1, wxT("xxx")); 
+	gatherSizer->Add(valued13, wxGBPosition(1, 3), wxDefaultSpan, wxALIGN_RIGHT);
+	//valued14 = new wxStaticText(gatherPanel, -1, wxT("xxx")); 
+	//gatherSizer->Add(valued14, wxGBPosition(1, 4), wxDefaultSpan, wxALIGN_RIGHT);
+
+	rated1 = new wxStaticText(gatherPanel, -1, wxT("xxx.x / h")); 
+	gatherSizer->Add(rated1, wxGBPosition(2, 0), wxDefaultSpan, wxALIGN_RIGHT);
+	percentd11 = new wxStaticText(gatherPanel, -1, wxT("xx.x%")); 
+	gatherSizer->Add(percentd11, wxGBPosition(2, 1), wxDefaultSpan, wxALIGN_RIGHT);
+	percentd12 = new wxStaticText(gatherPanel, -1, wxT("xx.x%")); 
+	gatherSizer->Add(percentd12, wxGBPosition(2, 2), wxDefaultSpan, wxALIGN_RIGHT);
+	percentd13 = new wxStaticText(gatherPanel, -1, wxT("xx.x%")); 
+	gatherSizer->Add(percentd13, wxGBPosition(2, 3), wxDefaultSpan, wxALIGN_RIGHT);
+	
+	labeld2 = new wxStaticText(gatherPanel, -1, wxT("Crafting")); 
+	gatherSizer->Add(labeld2, wxGBPosition(3, 0));
+	valued21 = new wxStaticText(gatherPanel, -1, wxT("xxx")); 
+	gatherSizer->Add(valued21, wxGBPosition(3, 1), wxDefaultSpan, wxALIGN_RIGHT);
+	valued22 = new wxStaticText(gatherPanel, -1, wxT("xxx")); 
+	gatherSizer->Add(valued22, wxGBPosition(3, 2), wxDefaultSpan, wxALIGN_RIGHT);
+	valued23 = new wxStaticText(gatherPanel, -1, wxT("xxx")); 
+	gatherSizer->Add(valued23, wxGBPosition(3, 3), wxDefaultSpan, wxALIGN_RIGHT);
+	valued24 = new wxStaticText(gatherPanel, -1, wxT("xxx")); 
+	gatherSizer->Add(valued24, wxGBPosition(3, 4), wxDefaultSpan, wxALIGN_RIGHT);
+
+	rated2 = new wxStaticText(gatherPanel, -1, wxT("xxx.x / h")); 
+	gatherSizer->Add(rated2, wxGBPosition(4, 0), wxDefaultSpan, wxALIGN_RIGHT);
+	percentd21 = new wxStaticText(gatherPanel, -1, wxT("xx.x%")); 
+	gatherSizer->Add(percentd21, wxGBPosition(4, 1), wxDefaultSpan, wxALIGN_RIGHT);
+	percentd22 = new wxStaticText(gatherPanel, -1, wxT("xx.x%")); 
+	gatherSizer->Add(percentd22, wxGBPosition(4, 2), wxDefaultSpan, wxALIGN_RIGHT);
+	percentd23 = new wxStaticText(gatherPanel, -1, wxT("xx.x%")); 
+	gatherSizer->Add(percentd23, wxGBPosition(4, 3), wxDefaultSpan, wxALIGN_RIGHT);
+	percentd24 = new wxStaticText(gatherPanel, -1, wxT("xx.x%")); 
+	gatherSizer->Add(percentd24, wxGBPosition(4, 4), wxDefaultSpan, wxALIGN_RIGHT);
+	
+
+	gatherSizer->SetDimension(0, 0, FRAME_WIDTH, 130);
+	gatherPanel->SetSizer(gatherSizer);	
+
+	// ===========================================================================
+
+	gatherLevelSizer = new wxGridBagSizer(4, 4);
+
+	gatherLevelPanel = new wxPanel(this, wxID_ANY, wxDefaultPosition, wxSize(FRAME_WIDTH, PANEL_HEIGHT));
+	parentSizer->Add(gatherLevelPanel, wxGROW);
+
+	labele11 = new wxStaticText(gatherLevelPanel, -1, wxT("Gather Lvl Ups")); 
+	gatherLevelSizer->Add(labele11, wxGBPosition(0, 0), wxGBSpan(1, 2));
+	labele12 = new wxStaticText(gatherLevelPanel, -1, wxT("Lvl Ups / Hour")); 
+	gatherLevelSizer->Add(labele12, wxGBPosition(0, 3), wxGBSpan(1, 2));
+	labele13 = new wxStaticText(gatherLevelPanel, -1, wxT("This Level")); 
+	gatherLevelSizer->Add(labele13, wxGBPosition(1, 0), wxGBSpan(1, 2));
+	labele14 = new wxStaticText(gatherLevelPanel, -1, wxT("Last Level")); 
+	gatherLevelSizer->Add(labele14, wxGBPosition(1, 3), wxGBSpan(1, 2));
+
+	valuee11 = new wxStaticText(gatherLevelPanel, -1, wxT("xxx")); 
+	gatherLevelSizer->Add(valuee11, wxGBPosition(0, 2), wxDefaultSpan, wxALIGN_RIGHT);
+	valuee12 = new wxStaticText(gatherLevelPanel, -1, wxT("xx.x / h")); 
+	gatherLevelSizer->Add(valuee12, wxGBPosition(0, 5), wxDefaultSpan, wxALIGN_RIGHT);
+	valuee13 = new wxStaticText(gatherLevelPanel, -1, wxT("xx")); 
+	gatherLevelSizer->Add(valuee13, wxGBPosition(1, 2), wxDefaultSpan, wxALIGN_RIGHT);
+	valuee14 = new wxStaticText(gatherLevelPanel, -1, wxT("xx")); 
+	gatherLevelSizer->Add(valuee14, wxGBPosition(1, 5), wxDefaultSpan, wxALIGN_RIGHT);
+
+	labele21 = new wxStaticText(gatherLevelPanel, -1, wxT("Craft Lvl Ups")); 
+	gatherLevelSizer->Add(labele21, wxGBPosition(2, 0), wxGBSpan(1, 2));
+	labele22 = new wxStaticText(gatherLevelPanel, -1, wxT("Lvl Ups / Hour")); 
+	gatherLevelSizer->Add(labele22, wxGBPosition(2, 3), wxGBSpan(1, 2));
+	labele23 = new wxStaticText(gatherLevelPanel, -1, wxT("This Level")); 
+	gatherLevelSizer->Add(labele23, wxGBPosition(3, 0), wxGBSpan(1, 2));
+	labele24 = new wxStaticText(gatherLevelPanel, -1, wxT("Last Level")); 
+	gatherLevelSizer->Add(labele24, wxGBPosition(3, 3), wxGBSpan(1, 2));
+
+	valuee21 = new wxStaticText(gatherLevelPanel, -1, wxT("xxx")); 
+	gatherLevelSizer->Add(valuee21, wxGBPosition(2, 2), wxDefaultSpan, wxALIGN_RIGHT);
+	valuee22 = new wxStaticText(gatherLevelPanel, -1, wxT("xx.x / h")); 
+	gatherLevelSizer->Add(valuee22, wxGBPosition(2, 5), wxDefaultSpan, wxALIGN_RIGHT);
+	valuee23 = new wxStaticText(gatherLevelPanel, -1, wxT("xx")); 
+	gatherLevelSizer->Add(valuee23, wxGBPosition(3, 2), wxDefaultSpan, wxALIGN_RIGHT);
+	valuee24 = new wxStaticText(gatherLevelPanel, -1, wxT("xx")); 
+	gatherLevelSizer->Add(valuee24, wxGBPosition(3, 5), wxDefaultSpan, wxALIGN_RIGHT);
+
+	labele31 = new wxStaticText(gatherLevelPanel, -1, wxT("G XPe")); 
+	gatherLevelSizer->Add(labele31, wxGBPosition(4, 0));
+	gatherGauge = new wxGauge(gatherLevelPanel, XP_BAR_ID, 10000, wxDefaultPosition, wxSize(FRAME_WIDTH / 3, -1), wxGA_SMOOTH);	
+	gatherLevelSizer->Add(gatherGauge, wxGBPosition(4, 1), wxGBSpan(1, 2));
+	labele32 = new wxStaticText(gatherLevelPanel, -1, wxT("C XPe")); 
+	gatherLevelSizer->Add(labele32, wxGBPosition(4, 3));
+	craftGauge = new wxGauge(gatherLevelPanel, XP_BAR_ID, 10000, wxDefaultPosition, wxSize(FRAME_WIDTH / 3, -1), wxGA_SMOOTH);	
+	gatherLevelSizer->Add(craftGauge, wxGBPosition(4, 4), wxGBSpan(1, 2));
+
+	gatherLevelSizer->SetDimension(0, 0, FRAME_WIDTH, 130);
+	gatherLevelPanel->SetSizer(gatherLevelSizer);	
+
+	// ===========================================================================
+
 	initSizer = new wxGridBagSizer(4, 4);
 	
 	initPanel = new wxPanel(this, wxID_ANY, wxDefaultPosition, wxSize(FRAME_WIDTH, PANEL_HEIGHT + NAV_HEIGHT));
@@ -234,6 +351,8 @@ MyFrame::MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
 	panel->Hide();
 	apPanel->Hide();
 	cashPanel->Hide();
+	gatherPanel->Hide();
+	gatherLevelPanel->Hide();
 	navigationPanel->Hide();
 	logFileNotFoundPanel->Hide();
 	manualExpUpdatePanel->Hide();
@@ -283,8 +402,13 @@ MyFrame::MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
 	}
 
 	expHourCalc = new ExpHourCalc();
+	gatheringLog = new GatheringLog();
+	locationPinger = new LocationPinger();
+	
 	parser = new LogFileParser(aionPath + LOG_FILE);
 	parser->setExpHourCalc(expHourCalc);
+	parser->setGatheringLog(gatheringLog);
+	parser->setLocationPinger(locationPinger);
 
 	if (!parser->isOK){
 		initPanel->Hide();
@@ -294,6 +418,8 @@ MyFrame::MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
 	
 	timer = new wxTimer(this, TIMER_ID);
 
+	//summaryFrame = new SummaryFrame("sdklfjslkdfj", wxPoint(-1, -1), wxSize(400, 600));
+	//summaryFrame->Show(true);
 }
 
 
@@ -304,7 +430,9 @@ void MyFrame::OnTimer(wxTimerEvent& event){
 	
 	parser->processLines();
 
-	if (expHourCalc->level != -1)
+	if (gatheringLog->currentlyCrafting)
+		this->SetTitle("[CRAFT] " + expHourCalc->getElapsedTime());
+	else if (expHourCalc->level != -1)
 		this->SetTitle("L" + formatNumber(expHourCalc->level) + " | " + expHourCalc->getElapsedTime());
 	else 
 		this->SetTitle(expHourCalc->getElapsedTime());
@@ -317,7 +445,7 @@ void MyFrame::OnTimer(wxTimerEvent& event){
 	}
 
 	if (currentMode != UPDATE_XP_MODE && currentMode != UPDATE_AP_MODE){
-		if (expHourCalc->needExpUpdate){
+		if (expHourCalc->needExpUpdate && expHourCalc->currentExp >= 0){
 			panel->Hide();
 			apPanel->Hide();
 			cashPanel->Hide();
@@ -346,6 +474,12 @@ void MyFrame::OnTimer(wxTimerEvent& event){
 			break;
 		case CASH_MODE:
 			refreshCashPanel();			
+			break;
+		case GATHER_MODE:
+			refreshGatherPanel();
+			break;
+		case GATHER_LEVEL_MODE:
+			refreshGatherLevelPanel();
 			break;
 		case UPDATE_XP_MODE:
 			if (!expHourCalc->needExpUpdate){
@@ -420,7 +554,7 @@ void MyFrame::refreshApPanel(){
 }
 
 /*********************************************************************************************
-Refresh kinal panel
+Refresh kinah panel
 *********************************************************************************************/
 void MyFrame::refreshCashPanel(){
 	valuec1->SetLabelText(formatNumber(expHourCalc->cashGained));
@@ -432,6 +566,58 @@ void MyFrame::refreshCashPanel(){
 	valuecb->SetLabelText(formatNumber(expHourCalc->salvationExp));
 	
 	cashPanel->Layout();
+}
+
+/*********************************************************************************************
+Refresh gather/craft panel
+*********************************************************************************************/
+void MyFrame::refreshGatherPanel(){
+	valued11->SetLabelText(formatNumber(gatheringLog->numGatheringSuccesses));
+	valued12->SetLabelText(formatNumber(gatheringLog->numGatheringFailures));
+	valued13->SetLabelText(formatNumber(gatheringLog->numGatheringCancellations));
+	
+	rated1->SetLabelText(formatDecimal(gatheringLog->getNumGatheredPerHour()) + " / h"); 	
+	percentd11->SetLabelText(formatPercent(gatheringLog->getGatherSuccessRate(), 1)); 	
+	percentd12->SetLabelText(formatPercent(gatheringLog->getGatherFailureRate(), 1)); 
+	percentd13->SetLabelText(formatPercent(gatheringLog->getGatherCancellationRate(), 1)); 
+
+	valued21->SetLabelText(formatNumber(gatheringLog->numCraftingSuccesses));
+	valued22->SetLabelText(formatNumber(gatheringLog->numCraftingFailures));
+	valued23->SetLabelText(formatNumber(gatheringLog->numCraftingCancellations));
+	valued24->SetLabelText(formatNumber(gatheringLog->numCraftingProcs));
+
+	rated2->SetLabelText(formatDecimal(gatheringLog->getNumCraftedPerHour()) + " / h"); 	
+	percentd21->SetLabelText(formatPercent(gatheringLog->getCraftSuccessRate(), 1));
+	percentd22->SetLabelText(formatPercent(gatheringLog->getCraftFailureRate(), 1)); 
+	percentd23->SetLabelText(formatPercent(gatheringLog->getCraftCancellationRate(), 1)); 
+	percentd24->SetLabelText(formatPercent(gatheringLog->getCraftProcRate(), 1)); 
+
+	gatherPanel->Layout();
+}
+
+/*********************************************************************************************
+Refresh gather/craft leveling panel
+*********************************************************************************************/
+void MyFrame::refreshGatherLevelPanel(){
+	valuee11->SetLabelText(formatNumber(gatheringLog->gatherLevelUps.size()));
+	valuee12->SetLabelText(formatDecimal(gatheringLog->getNumGatherLvlsPerHour()) + " / h");
+	valuee13->SetLabelText(formatPositiveNumber(gatheringLog->numGatheredSinceLevelUp));
+	valuee14->SetLabelText(formatPositiveNumber(gatheringLog->lastNumGatheredToLevelUp));
+	if (gatheringLog->estimateNumGathersToNextLevel > 0)
+		gatherGauge->SetValue((float)gatheringLog->numGatheredSinceLevelUp * 10000 / gatheringLog->estimateNumGathersToNextLevel);
+	else
+		gatherGauge->SetValue(0);
+
+	valuee21->SetLabelText(formatNumber(gatheringLog->craftLevelUps.size()));
+	valuee22->SetLabelText(formatDecimal(gatheringLog->getNumCraftLvlsPerHour()) + " / h");
+	valuee23->SetLabelText(formatPositiveNumber(gatheringLog->numCraftedSinceLevelUp));
+	valuee24->SetLabelText(formatPositiveNumber(gatheringLog->lastNumCraftedToLevelUp));
+	if (gatheringLog->estimateNumCraftsToNextLevel > 0)
+		craftGauge->SetValue((float)gatheringLog->numCraftedSinceLevelUp * 10000 / gatheringLog->estimateNumCraftsToNextLevel);
+	else
+		craftGauge->SetValue(0);
+
+	gatherLevelPanel->Layout();
 }
 
 /*********************************************************************************************
@@ -550,12 +736,26 @@ void MyFrame::OnNext(wxCommandEvent& event){
 		cashPanel->Show();		
 		break;
 	case CASH_MODE:
+		currentMode = GATHER_MODE;
+		refreshGatherPanel();
+		cashPanel->Hide();
+		gatherPanel->Show();
+		
+		break;
+	case GATHER_MODE:
+		currentMode = GATHER_LEVEL_MODE;
+		refreshGatherLevelPanel();
+		gatherPanel->Hide();
+		gatherLevelPanel->Show();
+		break;
+	case GATHER_LEVEL_MODE:
 		currentMode = XP_MODE;
 		refreshExpPanel();
-		cashPanel->Hide();
+		gatherLevelPanel->Hide();
 		panel->Show();		
 		break;
 	}
+	
 	this->Layout();
 
 }

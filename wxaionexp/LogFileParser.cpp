@@ -1,17 +1,15 @@
 #include "LogFileParser.h"
 
-/*********************************************************************************************
-Attach logfile class to this class
-*********************************************************************************************/
 LogFileParser::LogFileParser(string filename){
 	logFile = new LogFile(filename);
 	if (logFile->isOK) isOK = true;
 	else isOK = false;
 }
 
-/*********************************************************************************************
-Attach exp/hour class to this class
-*********************************************************************************************/
+LogFileParser::~LogFileParser(){
+	delete(logFile);
+}
+
 bool LogFileParser::setExpHourCalc(ExpHourCalc *calc){
 	
 	expHourCalc = calc;
@@ -19,15 +17,25 @@ bool LogFileParser::setExpHourCalc(ExpHourCalc *calc){
 	return false;
 }
 
-/*********************************************************************************************
-Read and parse new lines added to the Aion log file
-*********************************************************************************************/
+bool LogFileParser::setGatheringLog(GatheringLog *gather){
+	gatheringLog = gather;
+	if (isOK) return true;
+	else return false;
+}
+
+bool LogFileParser::setLocationPinger(LocationPinger *loc){
+	locationPinger = loc;
+	if (isOK) return true;
+	else return false;
+}
+
 void LogFileParser::processLines(){
 	queue<string> lines = logFile->readLines();
 
 	while(!lines.empty()){
 		string line = lines.front();
 		
+		// ExpHourCalc messages
 		if (line.find("You have joined ", START_OF_LINE) == START_OF_LINE){
 			int channelWordPos = line.find("Channel.", START_OF_LINE + 20);
 			if (channelWordPos != string::npos){
@@ -46,6 +54,9 @@ void LogFileParser::processLines(){
 			}
 			else if (line.find("Abyss ", 38) != string::npos){
 				expHourCalc->gainAP(line);
+			}
+			else if (line.find("experience from gathering.", 38)!= string::npos){
+				gatheringLog->gainGatherExp();
 			}
 
 		}
@@ -96,9 +107,64 @@ void LogFileParser::processLines(){
 			}
 		}
 		
+		// GatheringLog Messages
+		else if (line.find("You have started gathering ", START_OF_LINE) == START_OF_LINE){	
+			gatheringLog->gather(line);
+		}
+		else if (line.find("You have failed to gather ", START_OF_LINE) == START_OF_LINE){	
+			gatheringLog->gatherFailure(line);
+		}
+		else if (line.find("You have stopped gathering.", START_OF_LINE) == START_OF_LINE){	
+			gatheringLog->gatherCancel();
+		}
+		else if (line.find("You are crafting ", START_OF_LINE) == START_OF_LINE){	
+			gatheringLog->craft(line);
+		}
+		else if (line.find("You have crafted ", START_OF_LINE) == START_OF_LINE){	
+			if (line.find("successfully.", START_OF_LINE + 17) != string::npos){
+				gatheringLog->gainCraftExp();
+			}
+			else{
+				gatheringLog->craftSuccess();
+			}
+		}
+		else if (line.find("You have failed to craft ", START_OF_LINE) == START_OF_LINE){	
+			gatheringLog->craftFailure(line);
+		}
+		else if (line.find("You must have at least one free space in your cube to craft.", START_OF_LINE) == START_OF_LINE){	
+			gatheringLog->inventoryFull();
+		}
+		else if (line.find("You stopped crafting.", START_OF_LINE) == START_OF_LINE){	
+			gatheringLog->craftCancel();
+		}		
+		else if (line.find("Your ", START_OF_LINE) == START_OF_LINE){	
+			if (line.find("has been upgraded to ", 27) != string::npos){
+				gatheringLog->gatherLevelUp(line);
+			}
+		}
+		else if (line.find("The skill level for the", START_OF_LINE) == START_OF_LINE){	
+			if (line.find("does not increase as the difficulty is too low.", START_OF_LINE + 24) != string::npos){
+				gatheringLog->skillLevelTooLow();
+			}			
+		}
+		/*
+		else if ((line.find("Your skill level does not increase with low level crafting as you are an Expert.", START_OF_LINE) == START_OF_LINE) ||
+			(line.find("Such basic crafting doesn't affect your skill level, Master.", START_OF_LINE) == START_OF_LINE)){
+				gatheringLog->skillLevelTooLow();
+		}
+		*/
+
+		else if (line.find("You must level up to raise your skill level.", START_OF_LINE) == START_OF_LINE){	
+			gatheringLog->levelCapped();
+		}
+		else if (line.find("[pos:") != string::npos){	
+			locationPinger->pingLocation(line);
+		}
+		
 
 		lines.pop();
 	}
 
 	expHourCalc->tallyExpPackets();
+	gatheringLog->tickCleanUp();
 }

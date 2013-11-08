@@ -43,12 +43,34 @@ string formatNumber(int number, bool addPlusSign){
 }
 
 /*********************************************************************************************
-Format percentages with 2 decimal spaces
+Format a positive integer, or display question marks if negative
 *********************************************************************************************/
-string formatPercent(float percentage){
+string formatPositiveNumber(int number){
 	ostringstream oss;
 	oss.imbue(locale(""));
-	oss << fixed << setprecision(2) << percentage << "%";
+	if (number >= 0) oss << fixed << number;
+	else oss << "?";
+	return oss.str();
+	
+}
+
+/*********************************************************************************************
+Format percentages with specified number of decimal spaces
+*********************************************************************************************/
+string formatPercent(float percentage, int numDecimals){
+	ostringstream oss;
+	oss.imbue(locale(""));
+	oss << fixed << setprecision(numDecimals) << percentage << "%";
+	return oss.str();
+}
+
+/*********************************************************************************************
+Format percentages with specified number of significant digits
+*********************************************************************************************/
+string formatDecimal(float decimalNumber, int numSigDigits){
+	ostringstream oss;
+	oss.imbue(locale(""));
+	oss << setprecision(numSigDigits) << decimalNumber;
 	return oss.str();
 }
 

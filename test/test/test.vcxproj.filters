@@ -27,10 +27,16 @@
     <ClCompile Include="..\..\wxaionexp\stringFunctions.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="testExpHourCalc.cpp">
+    <ClCompile Include="..\..\wxaionexp\LogFileParser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\wxaionexp\LogFileParser.cpp">
+    <ClCompile Include="..\..\wxaionexp\GatheringLog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\wxaionexp\Location.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="testGatheringLog.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -48,6 +54,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\wxaionexp\LogFileParser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\wxaionexp\GatheringLog.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\wxaionexp\Location.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

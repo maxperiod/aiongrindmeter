@@ -75,14 +75,18 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\wxaionexp\ExpHourCalc.cpp" />
+    <ClCompile Include="..\..\wxaionexp\GatheringLog.cpp" />
+    <ClCompile Include="..\..\wxaionexp\Location.cpp" />
     <ClCompile Include="..\..\wxaionexp\LogFile.cpp" />
     <ClCompile Include="..\..\wxaionexp\LogFileParser.cpp" />
     <ClCompile Include="..\..\wxaionexp\stringFunctions.cpp" />
-    <ClCompile Include="testExpHourCalc.cpp" />
+    <ClCompile Include="testGatheringLog.cpp" />
     <ClCompile Include="testHelpers.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\wxaionexp\ExpHourCalc.h" />
+    <ClInclude Include="..\..\wxaionexp\GatheringLog.h" />
+    <ClInclude Include="..\..\wxaionexp\Location.h" />
     <ClInclude Include="..\..\wxaionexp\LogFile.h" />
     <ClInclude Include="..\..\wxaionexp\LogFileParser.h" />
     <ClInclude Include="..\..\wxaionexp\stringFunctions.h" />

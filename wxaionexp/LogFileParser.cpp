@@ -111,6 +111,12 @@ void LogFileParser::processLines(){
 		else if (line.find("You have started gathering ", START_OF_LINE) == START_OF_LINE){	
 			gatheringLog->gather(line);
 		}
+		else if (line.find("You are gathering ", START_OF_LINE) == START_OF_LINE){	
+			gatheringLog->gather(line);
+		}
+		else if (line.find("You have gathered successfully.", START_OF_LINE) == START_OF_LINE){	
+			gatheringLog->gainGatherExp();
+		}
 		else if (line.find("You have failed to gather ", START_OF_LINE) == START_OF_LINE){	
 			gatheringLog->gatherFailure(line);
 		}
@@ -131,6 +137,9 @@ void LogFileParser::processLines(){
 		else if (line.find("You have failed to craft ", START_OF_LINE) == START_OF_LINE){	
 			gatheringLog->craftFailure(line);
 		}
+		else if (line.find("You failed to craft the combo, and crafted", START_OF_LINE) == START_OF_LINE){
+			gatheringLog->craftProcFailure();
+		}
 		else if (line.find("You must have at least one free space in your cube to craft.", START_OF_LINE) == START_OF_LINE){	
 			gatheringLog->inventoryFull();
 		}
@@ -144,7 +153,7 @@ void LogFileParser::processLines(){
 		}
 		else if (line.find("The skill level for the", START_OF_LINE) == START_OF_LINE){	
 			if (line.find("does not increase as the difficulty is too low.", START_OF_LINE + 24) != string::npos){
-				gatheringLog->skillLevelTooLow();
+				gatheringLog->skillLevelTooLow(line);
 			}			
 		}
 		/*

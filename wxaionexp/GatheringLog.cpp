@@ -6,6 +6,11 @@ GatheringLog::GatheringLog(){
 	reset();
 }
 
+void GatheringLog::start(){
+	reset();
+	startTime = clock();
+}
+
 void GatheringLog::reset(){
 	numGatheringSuccesses = 0;
 	numGatheringFailures = 0;
@@ -59,6 +64,12 @@ void GatheringLog::gather(string line){
 	stringstream ss(line);
 	
 	string dummy;
+	do {
+		getline(ss, dummy, ' ');		
+	}
+	while (dummy != "gathering" && ss.good());
+	
+	/*
 	getline(ss, dummy, ' '); //date
 	getline(ss, dummy, ' '); //time
 	getline(ss, dummy, ' '); //:
@@ -66,10 +77,10 @@ void GatheringLog::gather(string line){
 	getline(ss, dummy, ' '); //have
 	getline(ss, dummy, ' '); //started
 	getline(ss, dummy, ' '); //gathering
-
+	*/
 	getline(ss, dummy, '.');
 	//numGatheringSuccesses ++;
-
+	
 	//currentlyCrafting = true;
 
 	lastItemGathered = dummy;
@@ -134,7 +145,10 @@ void GatheringLog::craft(string line){
 	getline(ss, dummy, '.');
 	//numGatheringSuccesses ++;
 	
-	if (currentlyCrafting) numCraftingProcs ++;
+	if (currentlyCrafting){
+		numCraftingProcs ++;
+		procBaseItem = lastItemGathered;
+	}
 	currentlyCrafting = true;
 
 	lastItemGathered = dummy;
@@ -185,6 +199,13 @@ void GatheringLog::craftCancel(){
 		}
 	}
 	currentlyCrafting = false;
+}
+
+void GatheringLog::craftProcFailure(){
+	numCraftingProcs --;
+	currentlyCrafting = false;
+	lastItemGathered = procBaseItem;
+	craftSuccess();
 }
 
 void GatheringLog::inventoryFull(){
@@ -254,7 +275,7 @@ void GatheringLog::gatherLevelUp(string line){
 	getline(ss, dummy, ' '); //(Gathering Discipline)
 
 	bool isGather = false;
-	if (dummy == "Essencetapping" || dummy == "Aethertapping"){
+	if (dummy == "Essencetapping" || dummy == "Aethertapping" || dummy == "Collection"){
 		isGather = true;	
 	}
 	//cout << dummy << endl;
@@ -294,21 +315,45 @@ void GatheringLog::craftLevelUp(string line){
 
 
 void GatheringLog::calculateNextLevelRequirementEstimates(){
+	int estimateNumGathersToNextLevel = -1;
+	int estimateNumCraftsToNextLevel = -1;
+
 	if (lastNumGatheredToLevelUp > 0){
 		if (numGatheredSinceLevelUp < lastNumGatheredToLevelUp) estimateNumGathersToNextLevel = lastNumGatheredToLevelUp;
 		else estimateNumGathersToNextLevel = numGatheredSinceLevelUp + 1;
 	}
-	else estimateNumGathersToNextLevel = -1;
+	if (estimateNumGathersToNextLevel > 0) 
+		estimatedGatherExpBar = (float)numGatheredSinceLevelUp / estimateNumGathersToNextLevel;
+	else estimatedGatherExpBar = 0;
 
 	if (lastNumCraftedToLevelUp > 0){
 		if (numCraftedSinceLevelUp < lastNumCraftedToLevelUp) estimateNumCraftsToNextLevel = lastNumCraftedToLevelUp;
 		else estimateNumCraftsToNextLevel = numCraftedSinceLevelUp + 1;
 	}
-	else estimateNumCraftsToNextLevel = -1;
+	if (estimateNumCraftsToNextLevel > 0)
+		estimatedCraftExpBar = (float) numCraftedSinceLevelUp / estimateNumCraftsToNextLevel;
+	else estimatedCraftExpBar = 0;
+	
 }
 
-void GatheringLog::skillLevelTooLow(){
-	gatherSuccess();
+void GatheringLog::skillLevelTooLow(string line){
+
+	stringstream ss(line);
+	
+	string dummy;
+	getline(ss, dummy, ' '); //date
+	getline(ss, dummy, ' '); //time
+	getline(ss, dummy, ' '); //:
+	getline(ss, dummy, ' '); //The
+	getline(ss, dummy, 'h'); //Skill level for t	
+	getline(ss, dummy, ' '); //e
+	getline(ss, dummy, ' '); //(Gathering Discipline)
+
+	//bool isGather = false;
+	if (dummy == "Essencetapping" || dummy == "Aethertapping" || dummy == "Collection"){
+		gatherSuccess();
+	}
+		
 }
 
 void GatheringLog::levelCapped(){
@@ -327,12 +372,12 @@ float GatheringLog::getNumCraftedPerHour(){
 }
 
 float GatheringLog::getNumGatherLvlsPerHour(){
-	return gatherLevelUps.size()
+	return ((float)gatherLevelUps.size() + estimatedGatherExpBar)
 		/ ((clock() - startTime) / (CLOCKS_PER_SEC * 3600));
 }
 
 float GatheringLog::getNumCraftLvlsPerHour(){
-	return craftLevelUps.size()
+	return ((float)craftLevelUps.size() + estimatedCraftExpBar)
 		/ ((clock() - startTime) / (CLOCKS_PER_SEC * 3600));
 }
 

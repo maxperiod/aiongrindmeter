@@ -603,19 +603,13 @@ void MyFrame::refreshGatherLevelPanel(){
 	valuee12->SetLabelText(formatDecimal(gatheringLog->getNumGatherLvlsPerHour()) + " / h");
 	valuee13->SetLabelText(formatPositiveNumber(gatheringLog->numGatheredSinceLevelUp));
 	valuee14->SetLabelText(formatPositiveNumber(gatheringLog->lastNumGatheredToLevelUp));
-	if (gatheringLog->estimateNumGathersToNextLevel > 0)
-		gatherGauge->SetValue((float)gatheringLog->numGatheredSinceLevelUp * 10000 / gatheringLog->estimateNumGathersToNextLevel);
-	else
-		gatherGauge->SetValue(0);
+	gatherGauge->SetValue(gatheringLog->estimatedGatherExpBar * 10000 );
 
 	valuee21->SetLabelText(formatNumber(gatheringLog->craftLevelUps.size()));
 	valuee22->SetLabelText(formatDecimal(gatheringLog->getNumCraftLvlsPerHour()) + " / h");
 	valuee23->SetLabelText(formatPositiveNumber(gatheringLog->numCraftedSinceLevelUp));
 	valuee24->SetLabelText(formatPositiveNumber(gatheringLog->lastNumCraftedToLevelUp));
-	if (gatheringLog->estimateNumCraftsToNextLevel > 0)
-		craftGauge->SetValue((float)gatheringLog->numCraftedSinceLevelUp * 10000 / gatheringLog->estimateNumCraftsToNextLevel);
-	else
-		craftGauge->SetValue(0);
+	craftGauge->SetValue(gatheringLog->estimatedCraftExpBar * 10000);	
 
 	gatherLevelPanel->Layout();
 }
@@ -658,6 +652,7 @@ void MyFrame::OnStart(wxCommandEvent& event){
 		}
 		parser->processLines();
 		expHourCalc->start(level, currentExp, currentAp);
+		gatheringLog->start();
 		timer->Start(1000);
 
 		currentMode = XP_MODE;

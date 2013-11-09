@@ -26,6 +26,47 @@ int main(){
 
 	//================================================================================
 
+	header("Lowbie collection");
+
+	expHourCalc->reset();
+	gatheringLog->reset();
+
+	appendFile("temp.txt", "2013.11.08 17:42:59 : You are gathering Aria. ");	
+	parser->processLines();
+	appendFile("temp.txt", "2013.11.08 17:43:00 : Striped Kerub inflicted 14 damage on robotmaxman-TM. ");
+	appendFile("temp.txt", "2013.11.08 17:43:00 : robotmaxman-TM inflicted 100 damage on Striped Kerub by using Smite I. ");
+	appendFile("temp.txt", "2013.11.08 17:43:01 : Your Collection skill has been upgraded to 2 points. ");
+	appendFile("temp.txt", "2013.11.08 17:43:01 : You have gained 80 XP. ");
+	appendFile("temp.txt", "2013.11.08 17:43:01 : You have gathered successfully. ");
+	appendFile("temp.txt", "2013.11.08 17:43:01 : You have acquired [item:152000401;ver4;;;;]. ");
+	parser->processLines();
+	appendFile("temp.txt", "2013.11.08 17:43:18 : You are gathering Aria. ");
+	parser->processLines();
+	appendFile("temp.txt", "2013.11.08 17:43:25 : Your Collection skill has been upgraded to 3 points. ");
+	appendFile("temp.txt", "2013.11.08 17:43:26 : You have acquired [item:152000401;ver4;;;;]. ");
+	appendFile("temp.txt", "2013.11.08 17:43:26 : You have gained 80 XP. ");
+	appendFile("temp.txt", "2013.11.08 17:43:26 : You have gathered successfully. ");
+	parser->processLines();
+
+	doTest("numGatheringSuccesses", gatheringLog->numGatheringSuccesses, 2);
+	doTest("numGatheringFailures", gatheringLog->numGatheringFailures, 0);
+	doTest("numGatheringCancellations", gatheringLog->numGatheringCancellations, 0);
+	doTest("gatheringRecord.size()", gatheringLog->gatheringRecord.size(), 1);	
+	doTest("gatheringRecord[0].name", gatheringLog->gatheringRecord[0].name, "Aria");
+	doTest("gatheringRecord[0].successes", gatheringLog->gatheringRecord[0].successes, 2);
+	doTest("gatheringRecord[0].failures", gatheringLog->gatheringRecord[0].failures, 0);
+	doTest("gatheringRecord[0].cancellations", gatheringLog->gatheringRecord[0].cancellations, 0);
+	doTest("gatherLevelUps.size()", gatheringLog->gatherLevelUps.size(), 2);
+	doTest("numGatheredSinceLevelUp", gatheringLog->numGatheredSinceLevelUp, 0);
+	doTest("gatherLevelUps[0].level", gatheringLog->gatherLevelUps[0].level, 2);	
+	doTest("gatherLevelUps[0].numGathers", gatheringLog->gatherLevelUps[0].numGathers, -1);	
+	doTest("gatherLevelUps[1].level", gatheringLog->gatherLevelUps[1].level, 3);	
+	doTest("gatherLevelUps[1].numGathers", gatheringLog->gatherLevelUps[1].numGathers, 1);	
+	doTest("numGatheredSinceLevelUp", gatheringLog->numGatheredSinceLevelUp, 0);
+	doTest("lastNumGatheredToLevelUp", gatheringLog->lastNumGatheredToLevelUp, 1);
+
+	//================================================================================
+
 	header("Essencetapping - no level up");
 	expHourCalc->reset();
 	gatheringLog->reset();
@@ -55,7 +96,7 @@ int main(){
 	doTest("currentlyCrafting", gatheringLog->currentlyCrafting, false);
 	
 
-	header("Essencetapping - level up");
+	header("Essencetapping - single level up");
 
 	appendFile("temp.txt", "2013.11.03 19:19:33 : You have started gathering Fresh Hintera. ");
 	parser->processLines();
@@ -76,7 +117,7 @@ int main(){
 	doTest("gatherLevelUps.size()", gatheringLog->gatherLevelUps.size(), 1);
 	doTest("gatherLevelUps[0].level", gatheringLog->gatherLevelUps[0].level, 485);
 	doTest("gatherLevelUps[0].numGathers", gatheringLog->gatherLevelUps[0].numGathers, -1);
-	doTest("", gatheringLog->numGatheredSinceLevelUp, 0);
+	doTest("numGatheredSinceLevelUp", gatheringLog->numGatheredSinceLevelUp, 0);
 	doTest("gatheringLvl", gatheringLog->gatheringLvl, 485);
 	doTest("currentlyCrafting", gatheringLog->currentlyCrafting, false);
 
@@ -269,7 +310,22 @@ int main(){
 	doTest("numGatheredSinceLevelUp", gatheringLog->numGatheredSinceLevelUp, 2);
 	doTest("lastNumGatheredToLevelUp", gatheringLog->lastNumGatheredToLevelUp, 3);
 
+	header("Sanity check: I did not craft anything");
+
+	doTest("numCraftingSuccesses", gatheringLog->numCraftingSuccesses, 0);
+	doTest("numCraftingFailures", gatheringLog->numCraftingFailures, 0);	
+	doTest("numCraftingCancellations", gatheringLog->numCraftingCancellations, 0);
+	doTest("numCraftingProcs", gatheringLog->numCraftingProcs, 0);	
+	doTest("craftLevelUps.size()", gatheringLog->craftLevelUps.size(), 0);	
+	doTest("craftingRecord.size()", gatheringLog->craftingRecord.size(), 0);
+	doTest("craftingLvl", gatheringLog->craftingLvl, -1);
+	doTest("numCraftedSinceLevelUp", gatheringLog->numCraftedSinceLevelUp, -2);
+	doTest("lastNumCraftedToLevelUp", gatheringLog->lastNumCraftedToLevelUp, -2);
+
 	//================================================================================
+
+	cout << endl << "Hit ENTER to continue" << endl;
+	getchar();
 
 	expHourCalc->reset();
 	gatheringLog->reset();
@@ -327,7 +383,6 @@ int main(){
 	doTest("craftLevelUps[2].numGathers", gatheringLog->craftLevelUps[2].numGathers, 1);
 	doTest("numCraftedSinceLevelUp", gatheringLog->numCraftedSinceLevelUp, 0);
 	doTest("lastNumCraftedToLevelUp", gatheringLog->lastNumCraftedToLevelUp, 1);
-	doTest("estimateNumCraftsToNextLevel", gatheringLog->estimateNumCraftsToNextLevel, 1);
 	doTest("currentlyCrafting", gatheringLog->currentlyCrafting, false);
 	 
 	header("Crafting procs");
@@ -336,13 +391,17 @@ int main(){
 	parser->processLines();
 	appendFile("temp.txt", "2013.07.17 11:13:31 : You are crafting Tasty Poma Herb Bulgogi. ");
 	parser->processLines();
+
+	doTest("procBaseItem", gatheringLog->procBaseItem, "Poma Herb Bulgogi");
+
 	appendFile("temp.txt", "2013.07.17 11:14:04 : You have gained 15,210 XP. ");
 	appendFile("temp.txt", "2013.07.17 11:14:04 : You have crafted successfully. ");
 	appendFile("temp.txt", "2013.07.17 11:14:04 : You have crafted 2 [item:160002347;ver4;;;;]s. ");
 	appendFile("temp.txt", "2013.07.17 11:14:07 : You are crafting Poma Herb Bulgogi. ");
 	parser->processLines();
 	appendFile("temp.txt", "2013.07.17 11:14:34 : You are crafting Tasty Poma Herb Bulgogi. ");
-	parser->processLines();
+	parser->processLines();	
+
 	appendFile("temp.txt", "2013.07.17 11:14:49 : You have crafted 2 [item:160002347;ver4;;;;]s. ");
 	appendFile("temp.txt", "2013.07.17 11:14:49 : You have gained 15,210 XP. ");
 	appendFile("temp.txt", "2013.07.17 11:14:49 : You have crafted successfully. ");
@@ -352,9 +411,7 @@ int main(){
 	appendFile("temp.txt", "2013.07.17 11:15:14 : You have gained 15,210 XP. ");
 	appendFile("temp.txt", "2013.07.17 11:15:14 : You have crafted successfully. ");
 	appendFile("temp.txt", "2013.07.17 11:15:14 : You have crafted 2 [item:160002341;ver4;;;;]s. ");
-	parser->processLines();
-
-	header("Crafting must level up");
+	parser->processLines();	
 
 	doTest("numCraftingSuccesses", gatheringLog->numCraftingSuccesses, 6);
 	doTest("numCraftingFailures", gatheringLog->numCraftingFailures, 1);	
@@ -365,7 +422,7 @@ int main(){
 	doTest("gatheringRecord.size()", gatheringLog->gatheringRecord.size(), 0);
 	doTest("craftingRecord.size()", gatheringLog->craftingRecord.size(), 3);
 	doTest("craftingRecord[1].name", gatheringLog->craftingRecord[1].name, "Poma Herb Bulgogi");
-	doTest("craftingRecord[2].name", gatheringLog->craftingRecord[2].name, "Tasty Poma Herb Bulgogi");
+	doTest("craftingRecord[2].name", gatheringLog->craftingRecord[2].name, "Tasty Poma Herb Bulgogi");	
 	doTest("craftingRecord[1].successes", gatheringLog->craftingRecord[1].successes, 1);
 	doTest("craftingRecord[2].successes", gatheringLog->craftingRecord[2].successes, 2);
 	doTest("numCraftedSinceLevelUp", gatheringLog->numCraftedSinceLevelUp, 3);
@@ -379,8 +436,66 @@ int main(){
 	appendFile("temp.txt", "2013.07.17 11:15:14 : You have crafted successfully. ");
 	parser->processLines();
 		
+	header("Craft level capped");
+
+	doTest("numCraftingSuccesses", gatheringLog->numCraftingSuccesses, 7);
+	doTest("numCraftingFailures", gatheringLog->numCraftingFailures, 1);	
+	doTest("numCraftingCancellations", gatheringLog->numCraftingCancellations, 0);
+	doTest("numCraftingProcs", gatheringLog->numCraftingProcs, 2);
+	doTest("gatherLevelUps.size()", gatheringLog->gatherLevelUps.size(), 0);
+	doTest("craftLevelUps.size()", gatheringLog->craftLevelUps.size(), 3);
+	doTest("gatheringRecord.size()", gatheringLog->gatheringRecord.size(), 0);
+	doTest("craftingRecord.size()", gatheringLog->craftingRecord.size(), 3);
+	doTest("craftingRecord[1].successes", gatheringLog->craftingRecord[1].successes, 2);
+	doTest("craftingRecord[2].successes", gatheringLog->craftingRecord[2].successes, 2);
 	doTest("numCraftedSinceLevelUp", gatheringLog->numCraftedSinceLevelUp, 3);
 	doTest("isLevelCapped", gatheringLog->isLevelCapped, false);
+
+	header("Proc Failure");
+	appendFile("temp.txt", "2013.05.31 18:18:47 : You are crafting Poma Herb Bulgogi. ");
+	parser->processLines();
+	appendFile("temp.txt", "2013.05.31 18:18:57 : You are crafting Tasty Poma Herb Bulgogi.");
+	parser->processLines();
+	appendFile("temp.txt", "2013.05.31 18:19:20 : You failed to craft the combo, and crafted 2 [item:160002341;ver4;;;;]s instead. ");
+	appendFile("temp.txt", "2013.05.31 18:19:20 : You have gained 10,914 XP (Energy of Repose 3,118). ");
+	appendFile("temp.txt", "2013.05.31 18:19:20 : The Dresser of Concentration effect has been applied. ");
+	appendFile("temp.txt", "2013.05.31 18:19:20 : You have crafted successfully. ");
+	parser->processLines();
+
+	doTest("numCraftingSuccesses", gatheringLog->numCraftingSuccesses, 8);
+	doTest("numCraftingFailures", gatheringLog->numCraftingFailures, 1);	
+	doTest("numCraftingCancellations", gatheringLog->numCraftingCancellations, 0);
+	doTest("numCraftingProcs", gatheringLog->numCraftingProcs, 2);
+	doTest("gatherLevelUps.size()", gatheringLog->gatherLevelUps.size(), 0);
+	doTest("craftLevelUps.size()", gatheringLog->craftLevelUps.size(), 3);
+	doTest("gatheringRecord.size()", gatheringLog->gatheringRecord.size(), 0);
+	doTest("craftingRecord.size()", gatheringLog->craftingRecord.size(), 3);
+	doTest("craftingRecord[1].name", gatheringLog->craftingRecord[1].name, "Poma Herb Bulgogi");
+	doTest("craftingRecord[2].name", gatheringLog->craftingRecord[2].name, "Tasty Poma Herb Bulgogi");
+	doTest("craftingRecord[1].successes", gatheringLog->craftingRecord[1].successes, 3);
+	doTest("craftingRecord[2].successes", gatheringLog->craftingRecord[2].successes, 2);
+	doTest("numCraftedSinceLevelUp", gatheringLog->numCraftedSinceLevelUp, 4);
+	doTest("currentlyCrafting", gatheringLog->currentlyCrafting, false);
+
+	header("Skill level too low");
+	appendFile("temp.txt", "2013.11.08 16:31:42 : You are crafting Horned Dragon Emperor's Salad. ");
+	parser->processLines();
+	appendFile("temp.txt", "2013.11.08 16:31:54 : [3.LFG] [charname:Theredor;1.0000 0.6941 0.6941]: [cmd:cFkpTZP8yRXX/HbmhcbMokVRg5mfKVnkcIKURP7j+0JFUYOZnylZ5HCClET+4/tCtHO9gK1sD3F71HcBPyK5Bg==]lf2m sauro need sorc and sw ");
+	appendFile("temp.txt", "2013.11.08 16:31:57 : The skill level for the Cooking skill does not increase as the difficulty is too low. ");
+	appendFile("temp.txt", "2013.11.08 16:31:57 : You have crafted 2 [item:160002385;ver4;;;;]s. ");
+	parser->processLines();
+
+	doTest("numCraftingSuccesses", gatheringLog->numCraftingSuccesses, 9);
+	doTest("numCraftingFailures", gatheringLog->numCraftingFailures, 1);	
+	doTest("numCraftingCancellations", gatheringLog->numCraftingCancellations, 0);
+	doTest("numCraftingProcs", gatheringLog->numCraftingProcs, 2);	
+	doTest("craftLevelUps.size()", gatheringLog->craftLevelUps.size(), 3);	
+	doTest("craftingRecord.size()", gatheringLog->craftingRecord.size(), 4);
+	doTest("craftingRecord[3].name", gatheringLog->craftingRecord[3].name, "Horned Dragon Emperor's Salad");	
+	doTest("craftingRecord[3].successes", gatheringLog->craftingRecord[3].successes, 1);	
+	doTest("numCraftedSinceLevelUp", gatheringLog->numCraftedSinceLevelUp, 4);
+	doTest("currentlyCrafting", gatheringLog->currentlyCrafting, false);
+
 
 	//================================================================================
 
@@ -417,18 +532,18 @@ int main(){
 	appendFile("temp.txt", "2013.07.21 12:41:59 : You stopped crafting.");
 	parser->processLines();
 
-	doTest("numCraftingSuccesses", gatheringLog->numCraftingSuccesses, 14);
+	doTest("numCraftingSuccesses", gatheringLog->numCraftingSuccesses, 16);
 	doTest("numCraftingFailures", gatheringLog->numCraftingFailures, 1);	
 	doTest("numCraftingCancellations", gatheringLog->numCraftingCancellations, 1);
-	doTest("getCraftSuccessRate()", gatheringLog->getCraftSuccessRate(), (float)14 * 100 / 16);
-	doTest("getCraftFailureRate()", gatheringLog->getCraftFailureRate(), (float)1 * 100 / 16);
-	doTest("getCraftCancellationRate()", gatheringLog->getCraftCancellationRate(), (float)1 * 100 / 16);
-	doTest("getCraftProcRate()", gatheringLog->getCraftProcRate(), (float) 2 * 100 / 14);
-	doTest("craftingRecord[4].cancellations", gatheringLog->craftingRecord[4].cancellations, 1);
+	doTest("getCraftSuccessRate()", gatheringLog->getCraftSuccessRate(), (float)16 * 100 / 18);
+	doTest("getCraftFailureRate()", gatheringLog->getCraftFailureRate(), (float)1 * 100 / 18);
+	doTest("getCraftCancellationRate()", gatheringLog->getCraftCancellationRate(), (float)1 * 100 / 18);
+	doTest("getCraftProcRate()", gatheringLog->getCraftProcRate(), (float) 2 * 100 / 16);
+	doTest("craftingRecord[5].cancellations", gatheringLog->craftingRecord[5].cancellations, 1);
 	doTest("numCraftingProcs", gatheringLog->numCraftingProcs, 2);
 	doTest("gatherLevelUps.size()", gatheringLog->gatherLevelUps.size(), 0);
 	doTest("craftLevelUps.size()", gatheringLog->craftLevelUps.size(), 3);
-	doTest("numCraftedSinceLevelUp", gatheringLog->numCraftedSinceLevelUp, 3);
+	doTest("numCraftedSinceLevelUp", gatheringLog->numCraftedSinceLevelUp, 4);
 	doTest("currentlyCrafting", gatheringLog->currentlyCrafting, false);
 
 	header("Inventory full");
@@ -438,8 +553,19 @@ int main(){
 	parser->processLines();
 
 	doTest("numCraftingCancellations", gatheringLog->numCraftingCancellations, 1);
-	doTest("getCraftCancellationRate()", gatheringLog->getCraftCancellationRate(), (float)1 * 100 / 16);
-	doTest("craftingRecord[4].cancellations", gatheringLog->craftingRecord[4].cancellations, 1);
+	doTest("getCraftCancellationRate()", gatheringLog->getCraftCancellationRate(), (float)1 * 100 / 18);
+	doTest("craftingRecord[5].cancellations", gatheringLog->craftingRecord[5].cancellations, 1);
+
+	header("Sanity check: I did not gather anything");
+
+	doTest("numGatheringSuccesses", gatheringLog->numGatheringSuccesses, 0);
+	doTest("numGatheringFailures", gatheringLog->numGatheringFailures, 0);
+	doTest("numGatheringCancellations", gatheringLog->numGatheringCancellations, 0);
+	doTest("numGatheredSinceLevelUp", gatheringLog->numGatheredSinceLevelUp, -2);	
+	doTest("lastNumGatheredToLevelUp", gatheringLog->lastNumGatheredToLevelUp, -2);
+	doTest("gatheringRecord.size()", gatheringLog->gatheringRecord.size(), 0);		
+	doTest("gatherLevelUps.size()", gatheringLog->gatherLevelUps.size(), 0);	
+	doTest("gatheringLvl", gatheringLog->gatheringLvl, -1);
 
 	//================================================================================
 
@@ -447,6 +573,7 @@ int main(){
 	delete(parser);
 	remove("temp.txt");
 
+	cout << endl << "Hit ENTER to continue" << endl;
 	getchar();
 	return 0;
 }

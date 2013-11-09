@@ -45,6 +45,7 @@ public:
 	int craftingLvl;
 
 	string lastItemGathered;
+	string procBaseItem;
 
 	bool isLevelCapped;
 	bool currentlyCrafting;
@@ -59,8 +60,9 @@ public:
 
 	void craft(string line);
 	void craftSuccess();
-	void craftFailure(string line);
+	void craftFailure(string line);	
 	void craftCancel();
+	void craftProcFailure();
 	void clearCraftingStatus();
 
 	void inventoryFull();
@@ -80,10 +82,12 @@ public:
 	void gatherLevelUp(string line);
 	void craftLevelUp(string line);
 
-	int estimateNumGathersToNextLevel;
-	int estimateNumCraftsToNextLevel;	
+	float estimatedGatherExpBar;	// this value is between 0 and 1
+	float estimatedCraftExpBar;		// this value is between 0 and 1
+	//int estimateNumGathersToNextLevel;
+	//int estimateNumCraftsToNextLevel;	
 	
-	void skillLevelTooLow();
+	void skillLevelTooLow(string line);
 	void levelCapped();	
 
 	float getNumGatheredPerHour();

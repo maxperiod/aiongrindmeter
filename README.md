@@ -143,7 +143,7 @@ There is no AP loss in instance server (Dredgion, Crucible arenas, Kamar Battlef
 
 * Gather/Craft Lvl Ups: Number of times you have leveled up a profession this session.
  
-* Lvl Ups / Hour: Number of times you have leveled up a profession this session.
+* Lvl Ups / Hour: Average speed of gather/craft leveling this session.
 
 * This Level: Number of gathers/crafts elapsed since last time you have leveled the profession up. 
  

@@ -118,6 +118,8 @@ There is no AP loss in instance server (Dredgion, Crucible arenas, Kamar Battlef
 * Cash Flow Out: Amount of Kinah you have spent.
 
 * Net Change: The net increase (if positive) or net decrease (if negative) of your kinah.
+ 
+* Sales to NPCs: Amount of Kinah you received by selling vendor trash to NPCs.
 
 * Last Transaction: The amount of your last Kinah transaction.
 
@@ -127,15 +129,24 @@ There is no AP loss in instance server (Dredgion, Crucible arenas, Kamar Battlef
 * Repose Used: Energy of Repose (Rested XP) you have consumed this session.
 
 * Salvtn Used: Energy of Salvation you have consumed this session.
+ 
 
-## Known Bugs
 
-* XP Chart for Level 54 and 55 are known to be incorrect so far. 
+##Gathering / Crafting Mode
 
-Many of the entries for the XP Chart were provided by Jambo from NA Aion's official forums, which contained numerous errors. 
+![Kinah Mode](http://maxxperiod.com/aiongrindmeter/images/gathercraft.png)
 
-During initial development, I corrected many errors from Jambo's entries, mainly in the lower level range, by manually checking the level up values in-game.
 
-However I did not had any alternate character with levels between 52 and 60 to verify XP requirements for these levels, so any possible errors slipped into 1.0.0 initial release.
+##Gather/Craft Leveling Mode
 
-I also maintain an online version of ![Aion 4.0 NA XP Chart on Google Spreadsheet](https://docs.google.com/spreadsheet/ccc?key=0AkFTWF6A9JHjdHczaHJaSUQ1OEF6dExJYlFBTHd6REE#gid=0)
+![Kinah Mode](http://maxxperiod.com/aiongrindmeter/images/gathercraftlvl.png)
+
+* Gather/Craft Lvl Ups: Number of times you have leveled up a profession this session.
+ 
+* Lvl Ups / Hour: Number of times you have leveled up a profession this session.
+
+* This Level: Number of gathers/crafts elapsed since last time you have leveled the profession up. 
+ 
+* Last Level: Number of gathers/crafts actually taken for your most recent profession level up.
+ 
+* G XPe and C Xpe: Estimated XP bar for gathering and crafting respectively.

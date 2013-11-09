@@ -58,6 +58,9 @@ public:
 	int cashGained;
 	int cashSpent;
 	int lastCashTransaction;
+	int npcSales;
+
+	bool isNpcSales;
 	
 	int getNetCashFlow();
 
@@ -88,6 +91,8 @@ public:
 
 	bool updateExp(int newValue);
 	
+	void checkLevelUp();	
+
 	// AP functions
 	
 	string getCurrentServer();
@@ -103,19 +108,19 @@ public:
 	
 	bool updateAp(int newValue);
 	
-	//
-
-	void checkLevelUp();	
-
-	
+	// Cash and AP Transaction functions	
 
 	void gainExp(string line);
 	void gainAP(string line);
 	void gainCash(string line);
+	
+	void sellToNpc();
 
 	void spendCash(string line);
 	void spendAP(string line);
 		
+	// Misc functions
+
 	void acquireItem(string line);
 
 	void tallyExpPackets();

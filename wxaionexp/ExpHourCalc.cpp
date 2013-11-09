@@ -276,6 +276,9 @@ void ExpHourCalc::reset(){
 	cashSpent = 0;
 	lastCashTransaction = 0;
 
+	npcSales = 0;
+	isNpcSales = false;
+
 	// Private variables
 	tempExpGained = 0;
 	tempApGained = 0;
@@ -509,6 +512,11 @@ void ExpHourCalc::gainAP(string line){
 	
 	int apValue = atoi(stripCommas(dummy).c_str());
 
+	if (isNpcSales){
+		relicAp -= apValue;
+		isNpcSales = false;
+	}
+
 	tempApGained += apValue;
 	tempNumApPackets ++;
 }
@@ -532,6 +540,11 @@ void ExpHourCalc::gainCash(string line){
 	int cashGain = atoi(stripCommas(dummy).c_str());
 	cashGained += cashGain;
 	lastCashTransaction = cashGain;
+
+	if (isNpcSales){
+		npcSales += cashGain;
+		isNpcSales = false;
+	}
 	
 }
 
@@ -576,6 +589,10 @@ void ExpHourCalc::spendAP(string line){
 	tempApGained -= apSpend;
 	tempNumApPackets ++;
 
+}
+
+void ExpHourCalc::sellToNpc(){
+	isNpcSales = true;
 }
 
 /*********************************************************************************************

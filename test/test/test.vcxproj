@@ -80,7 +80,7 @@
     <ClCompile Include="..\..\wxaionexp\LogFile.cpp" />
     <ClCompile Include="..\..\wxaionexp\LogFileParser.cpp" />
     <ClCompile Include="..\..\wxaionexp\stringFunctions.cpp" />
-    <ClCompile Include="testGatheringLog.cpp" />
+    <ClCompile Include="testExpHourCalc.cpp" />
     <ClCompile Include="testHelpers.cpp" />
   </ItemGroup>
   <ItemGroup>

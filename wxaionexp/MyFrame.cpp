@@ -98,7 +98,7 @@ MyFrame::MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
 	cashSizer->Add(labelc2, wxGBPosition(1, 0));
 	labelc3 = new wxStaticText(cashPanel, -1, wxT("Net Change")); 
 	cashSizer->Add(labelc3, wxGBPosition(2, 0));
-	labelc4 = new wxStaticText(cashPanel, -1, wxT("")); 
+	labelc4 = new wxStaticText(cashPanel, -1, wxT("Sales to NPCs")); 
 	cashSizer->Add(labelc4, wxGBPosition(3, 0));
 	labelc5 = new wxStaticText(cashPanel, -1, wxT("Last Transaction")); 
 	cashSizer->Add(labelc5, wxGBPosition(4, 0));
@@ -108,7 +108,7 @@ MyFrame::MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
 	cashSizer->Add(valuec2, wxGBPosition(1, 1), wxDefaultSpan, wxALIGN_RIGHT);
 	valuec3 = new wxStaticText(cashPanel, -1, wxT("x,xxx,xxx,xxx")); 
 	cashSizer->Add(valuec3, wxGBPosition(2, 1), wxDefaultSpan, wxALIGN_RIGHT);
-	valuec4 = new wxStaticText(cashPanel, -1, wxT("")); 
+	valuec4 = new wxStaticText(cashPanel, -1, wxT("xx,xxx,xxx")); 
 	cashSizer->Add(valuec4, wxGBPosition(3, 1), wxDefaultSpan, wxALIGN_RIGHT);
 	valuec5 = new wxStaticText(cashPanel, -1, wxT("x,xxx,xxx,xxx")); 
 	cashSizer->Add(valuec5, wxGBPosition(4, 1), wxDefaultSpan, wxALIGN_RIGHT);
@@ -526,7 +526,7 @@ void MyFrame::refreshExpPanel(){
 Refresh Abyss Points gains panel
 *********************************************************************************************/
 void MyFrame::refreshApPanel(){
-	if (expHourCalc->relicAp > 0){
+	if (expHourCalc->relicAp != 0){
 		valueb1->SetLabelText(formatNumber(expHourCalc->apGained) + " [" + formatNumber(expHourCalc->relicAp) + "]");	
 		valueb2->SetLabelText(formatKiloMega(expHourCalc->getApPerHour()) + " [" + formatKiloMega(expHourCalc->getRelicApPerHour()) + "]");
 	}
@@ -560,6 +560,7 @@ void MyFrame::refreshCashPanel(){
 	valuec1->SetLabelText(formatNumber(expHourCalc->cashGained));
 	valuec2->SetLabelText(formatNumber(expHourCalc->cashSpent));
 	valuec3->SetLabelText(formatNumber(expHourCalc->getNetCashFlow(), true));
+	valuec4->SetLabelText(formatNumber(expHourCalc->npcSales));
 	valuec5->SetLabelText(formatNumber(expHourCalc->lastCashTransaction, true));
 
 	valueca->SetLabelText(formatNumber(expHourCalc->reposeExp));

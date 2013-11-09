@@ -68,6 +68,12 @@ void LogFileParser::processLines(){
 				expHourCalc->spendCash(line);
 			}
 		}
+		else if (line.find("Sales complete.", START_OF_LINE) == START_OF_LINE){	
+			expHourCalc->sellToNpc();
+		}
+		else if (line.find("You sold the item.", START_OF_LINE) == START_OF_LINE){	
+			expHourCalc->sellToNpc();
+		}
 		else if (line.find("You have acquired ", START_OF_LINE) == START_OF_LINE){											
 			expHourCalc->acquireItem(line);			
 		}

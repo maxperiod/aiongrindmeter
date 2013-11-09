@@ -801,6 +801,51 @@ int main(){
 
 	//================================================================================
 
+	header("NPC Sales");
+	//isNpcSales
+	appendFile("temp.txt","2013.11.07 03:15:58 : Sales complete.");
+	appendFile("temp.txt","2013.11.07 03:15:58 : You have earned 288 Kinah.");	
+	
+	parser->processLines();
+
+	doTest("cashGained", expHourCalc->cashGained, 288);
+	doTest("cashSpent", expHourCalc->cashSpent, 0);
+	doTest("lastCashTransaction", expHourCalc->lastCashTransaction, 288);
+	doTest("getNetCashFlow()", expHourCalc->getNetCashFlow(), 288);
+	doTest("npcSales", expHourCalc->npcSales, 288);
+
+	appendFile("temp.txt", "2013.09.03 22:39:32 : You sold the item. ");	
+	appendFile("temp.txt", "2013.09.03 22:39:32 : You have gained 376,068 Abyss Points. ");	
+	parser->processLines();
+
+	doTest("currentAp", expHourCalc->currentAp, 10000 + 376068);
+	doTest("apGained", expHourCalc->apGained, 1000 + 376068);
+	doTest("relicAp", expHourCalc->relicAp, 6413 - 376068);
+
+	header("Not NPC Sales");
+
+	appendFile("temp.txt", "2013.11.05 13:04:54 : You have earned 11,550,000 Kinah.");
+	parser->processLines();
+
+	doTest("cashGained", expHourCalc->cashGained, 11550000 + 288);
+	doTest("cashSpent", expHourCalc->cashSpent, 0);
+	doTest("lastCashTransaction", expHourCalc->lastCashTransaction, 11550000);
+	doTest("getNetCashFlow()", expHourCalc->getNetCashFlow(), 11550288);
+	doTest("npcSales", expHourCalc->npcSales, 288);
+
+	appendFile("temp.txt", "2013.11.05 13:43:19 : Captain Anusa is under attack. ");
+	appendFile("temp.txt", "2013.11.05 13:43:20 : You have gained 5,674 Abyss Points. ");
+	appendFile("temp.txt", "2013.11.05 13:43:20 : Quest updated: [Service/Group] Unending Assault ");
+	parser->processLines();
+
+	doTest("currentAp", expHourCalc->currentAp, 10000 + 376068 + 5674);
+	doTest("apGained", expHourCalc->apGained, 1000 + 376068 + 5674);
+	doTest("relicAp", expHourCalc->relicAp, 6413 - 376068);
+
+
+
+	//================================================================================
+
 	header("Join Channel");
 
 	appendFile("temp.txt","2013.07.24 15:28:52 : You have joined the Poeta region channel. ");
@@ -811,6 +856,8 @@ int main(){
 	appendFile("temp.txt","2013.06.25 14:44:16 : You have joined Instance Server.");
 
 	parser->processLines();
+
+	doTest("currentServer", expHourCalc->currentServer, INSTANCE_SERVER);
 	doTest("lastTickHasChanges is false", expHourCalc->lastTickHasChanges, false);
 
 	//================================================================================

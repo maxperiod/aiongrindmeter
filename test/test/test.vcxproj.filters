@@ -36,7 +36,7 @@
     <ClCompile Include="..\..\wxaionexp\Location.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="testGatheringLog.cpp">
+    <ClCompile Include="testExpHourCalc.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

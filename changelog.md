@@ -1,3 +1,6 @@
+1.1.1
+* Fixed UI bug that occured when the player died during gathering/crafting or profession leveling mode, if XP or AP was initialized during startup
+
 1.1.0
 Gathering/crafting meter added
 * Gathers / crafts: Number of success/failures/cancellations/procs and their respective percentages

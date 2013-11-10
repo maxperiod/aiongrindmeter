@@ -449,6 +449,8 @@ void MyFrame::OnTimer(wxTimerEvent& event){
 			panel->Hide();
 			apPanel->Hide();
 			cashPanel->Hide();
+			gatherPanel->Hide();
+			gatherLevelPanel->Hide();
 			navigationPanel->Hide();
 			manualExpUpdatePanel->Show();
 			this->Layout();
@@ -458,6 +460,8 @@ void MyFrame::OnTimer(wxTimerEvent& event){
 			panel->Hide();
 			apPanel->Hide();
 			cashPanel->Hide();
+			gatherPanel->Hide();
+			gatherLevelPanel->Hide();
 			navigationPanel->Hide();
 			manualApUpdatePanel->Show();
 			this->Layout();

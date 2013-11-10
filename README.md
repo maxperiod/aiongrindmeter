@@ -2,10 +2,13 @@ Aion Grind Meter - Aion XP/hr + AP/hr meter
 
 ##Overview
 
-Aion Grind Meter is an XP/hour (Experience gained per hour) and/or AP/hour (Abyss Points gained per hour) meter for Aion.
-It is useful for determining how fast or slow you are leveling up, and/or gaining Abyss Points. 
+Aion Grind Meter contains various grinding meters for Aion: 
+* XP gains and XP/hour (Experience gained per hour) 
+* AP gain/loss and AP/hour (Abyss Points gained per hour).
+* Gathering and/or crafting success/failure/cancellation/procs, successes per hour
+* Gathering and/or crafting level ups per hour, estimated XP bars
 
-It uses the chat log file (Chat.log) to calculate your XP and AP gains. It does not interact or modify the Aion client in any way.
+It uses the chat log file (Chat.log) to obtain gameplay information. It does not interact or modify the Aion client in any way.
 
 Aion Grind Meter is written in C++ with wxWidgets library powering the Graphical User Interface (GUI).
 
@@ -136,6 +139,13 @@ There is no AP loss in instance server (Dredgion, Crucible arenas, Kamar Battlef
 
 ![Kinah Mode](http://maxxperiod.com/aiongrindmeter/images/gathercraft.png)
 
+* Success: Number and percentage of successful gathering / crafting attempts.
+ 
+* Failure: Number and percentage of failed gathering / crafting attempts due to the failure bar being filled up.
+ 
+* Cancel: Number and percentage of gathering / crafting attempts forcibly cancelled due to various rasons, such as enemy attack, flight time running out, or manually cancelled by player.
+ 
+* Number / h: Average speed of successful gathering / crafting attempts per hour.
 
 ##Gather/Craft Leveling Mode
 
@@ -149,4 +159,4 @@ There is no AP loss in instance server (Dredgion, Crucible arenas, Kamar Battlef
  
 * Last Level: Number of gathers/crafts actually taken for your most recent profession level up.
  
-* G XPe and C Xpe: Estimated XP bar for gathering and crafting respectively.
+* G XPe and C Xpe: Estimated XP bar for gathering and crafting respectively. The estimation calculation is (This Level) / (Last Level), and if (This Level) > (Last Level), then (This Level) / (this Level + 1) instead.

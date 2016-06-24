@@ -1,3 +1,5 @@
+##This version is obsolete. [Check out Aion Grind Meter 2 here](https://github.com/maxperiod/aiongrindmeter2)
+
 Aion Grind Meter - Aion XP/hr + AP/hr meter
 
 ##Overview
